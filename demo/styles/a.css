@@ -157,3 +157,91 @@
 [data-variant="a"] .project .text-link { color: var(--a-link); }
 [data-variant="a"] .project .text-link:hover,
 [data-variant="a"] .project .text-link.is-hover { text-decoration-thickness: 2px; }
+
+/* ===== Full-page layout (demo/variants/a.js). Only .page and its descendants;
+   the showcase never uses .page, so specimen blocks are unaffected. ===== */
+[data-variant="a"] .page {
+  --frame-ratio: 5 / 4;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-inline: clamp(var(--space-4), 4vw, var(--space-8));
+  padding-bottom: var(--space-10);
+}
+[data-variant="a"] .page .hero {
+  padding-block: var(--space-8) var(--space-6);
+  border-bottom: 1px solid var(--a-line);
+}
+[data-variant="a"] .page .identity { min-width: 0; }
+[data-variant="a"] .page .index-label { min-width: 0; overflow-wrap: anywhere; font-size: 0.9375rem; line-height: 1.3; }
+[data-variant="a"] .page .index a { padding-right: var(--space-2); }
+
+[data-variant="a"] .page-main {
+  max-width: 70rem;
+  margin-inline: auto;
+  display: grid;
+  gap: var(--space-8);
+  padding-top: var(--space-8);
+}
+@media (min-width: 48em) {
+  [data-variant="a"] .page .hero { padding-block: var(--space-10) var(--space-8); }
+  [data-variant="a"] .page-main { gap: var(--space-10); padding-top: var(--space-10); }
+}
+
+[data-variant="a"] .page .projects { max-width: none; }
+[data-variant="a"] .section-intro {
+  color: var(--a-muted);
+  margin-top: var(--space-4);
+  max-width: min(var(--measure), 100%);
+}
+[data-variant="a"] .project-list {
+  container-type: inline-size;
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+[data-variant="a"] .project-list > li { min-width: 0; }
+[data-variant="a"] .project-list .project { scroll-margin-top: var(--space-6); }
+
+/* Image frame becomes a link to the full-size local asset. Real captures mix portrait
+   and landscape, so the page frame uses 5/4 (showcase specimens keep 16/10); images are
+   letterboxed on the surface colour, never cropped. */
+[data-variant="a"] .frame-link {
+  border-radius: calc(var(--a-radius) - 2px);
+  transition: border-color var(--dur) var(--ease);
+}
+[data-variant="a"] .frame-link:hover,
+[data-variant="a"] .frame-link.is-hover { border-color: var(--a-accent); }
+[data-variant="a"] .frame-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: var(--a-surface);
+  /* alt text (image missing) inherits the frame's muted colour and stays centred */
+  font-size: 0.875rem;
+  line-height: 1.4;
+  text-align: center;
+  padding: var(--space-3);
+}
+[data-variant="a"] .project-body { min-width: 0; }
+[data-variant="a"] .project-n {
+  font-family: var(--a-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--a-accent);
+  margin-bottom: var(--space-2);
+}
+[data-variant="a"] .page .project .meta { max-width: none; }
+
+[data-variant="a"] .contact {
+  padding: var(--space-5);
+  border: 1px solid var(--a-line);
+  border-radius: var(--a-radius);
+  background: var(--a-surface);
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+[data-variant="a"] .contact-text { color: var(--a-text); font-size: 1.0625rem; }
