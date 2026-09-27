@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -127,4 +127,51 @@ test('symlinks are rejected without reading their target', (t) => {
 test('missing CLI argument is rejected', (t) => run(t, [], 1, /usage/i));
 test('non-directory CLI root is rejected', (t) => run(t, [join(fixture(t), 'index.html')], 1, /directory/i));
 test('real incomplete demo scaffold is rejected', (t) => run(t,
-  [resolve(import.meta.dirname, '../demo')], 1, /required copy/i));
+  [resolve(import.meta.dirname, '../demo')], 1, /Project.*exactly once|Project order/i));
+
+test('shared content exports the exact approved identity, section and contact', async () => {
+  const { identity, section, contact } = await import('../demo/content.js');
+  assert.deepEqual(identity, {
+    name: 'Jeremy Fabre', role: 'Senior Software Developer', tagline: 'Delivering quality software on budget.',
+  });
+  assert.deepEqual(section, { heading: copy[3], intro: copy[4] });
+  assert.deepEqual(contact, {
+    ctaLabel: 'View my projects', ctaHref: '#projects', label: 'Connect on LinkedIn',
+    href: linkedIn, text: copy[8],
+  });
+});
+
+test('shared content has exactly four ordered projects with approved copy and stable hooks', async () => {
+  const { projects } = await import('../demo/content.js');
+  assert.deepEqual(projects.map(({ id }) => id), ids);
+  const expected = [
+    ['The Dark Spire — TaleSpire Character Sheet',
+      'A digital Shadowdark character sheet for TaleSpire and standalone browsers, bringing character stats, inventory, spells, and dice-roll integration together.',
+      'HTML · CSS · JavaScript', 'Built with AI-assisted development.'],
+    ['Darklight — Torchlight Timer',
+      'An atmospheric countdown timer for torches and light spells in TaleSpire, with animated visuals, playback controls, and duration adjustments.',
+      'HTML · CSS · JavaScript', 'Built with AI-assisted development.'],
+    ['Dungeon Mapper',
+      'An agent-guided workflow for turning reviewed 2D dungeon descriptions into TaleSpire slabs, supported by deterministic validation, overlays, and export tools.',
+      'Python', 'Built with AI-assisted development; AI assists the mapping workflow.'],
+    ['NPC Voice',
+      'A local prototype for AI-driven NPC conversations, with a web control panel and integrations for language generation, speech recognition, and voice synthesis. Discord voice integration is still in development.',
+      'Elixir · Phoenix LiveView · JavaScript', 'Built with AI-assisted development; integrates AI dialogue and speech services.'],
+  ];
+  assert.deepEqual(projects.map(({ title, summary, stack, aiNote }) => [title, summary, stack, aiNote]), expected);
+  for (const project of projects) {
+    for (const [hook, field] of Object.entries({
+      'data-project': 'id', 'data-title': 'title', 'data-description': 'summary', 'data-ai-note': 'aiNote',
+    })) {
+      assert.equal(typeof project[hook], 'string');
+      assert.equal(project[hook], project[field]);
+    }
+  }
+});
+
+test('shared content source contains no private paths, contact alternatives or HTML tags', async () => {
+  await import('../demo/content.js');
+  const source = readFileSync(new URL('../demo/content.js', import.meta.url), 'utf8');
+  assert.doesNotMatch(source, /mailto:|github\.com|\/Users\//i);
+  assert.doesNotMatch(source, /<\/?[a-z][^>]*>/i);
+});
