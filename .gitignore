@@ -1,0 +1,24 @@
+# Private planning, receipts, and working data — never stage these.
+.omo/
+*.env
+.env*
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.pem
+*.key
+*PRIVATE*
+captures/
+private-captures/
+scratch/
+tmp/
+source-snapshots/
+snapshots/
+node_modules/
+__pycache__/
+.cache/
+.DS_Store
+*.log
