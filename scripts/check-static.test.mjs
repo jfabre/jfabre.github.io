@@ -126,8 +126,8 @@ test('symlinks are rejected without reading their target', (t) => {
 });
 test('missing CLI argument is rejected', (t) => run(t, [], 1, /usage/i));
 test('non-directory CLI root is rejected', (t) => run(t, [join(fixture(t), 'index.html')], 1, /directory/i));
-test('real incomplete demo scaffold is rejected', (t) => run(t,
-  [resolve(import.meta.dirname, '../demo')], 1, /Project.*exactly once|Project order/i));
+test('real integrated demo passes the static contract', (t) => run(t,
+  [resolve(import.meta.dirname, '../demo')], 0));
 
 test('shared content exports the exact approved identity, section and contact', async () => {
   const { identity, section, contact } = await import('../demo/content.js');

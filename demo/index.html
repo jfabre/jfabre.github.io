@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="dark light">
+  <title>Jeremy Fabre — portfolio design comparison (local demo)</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/a.css">
+  <link rel="stylesheet" href="styles/b.css">
+  <link rel="stylesheet" href="styles/c.css">
+  <style>
+    /* Integration-only rules: the fixed demo switcher and the space it reserves.
+       Visual identity stays in styles/{a,b,c}.css; the pill itself is styled by
+       .demo-controls in styles/base.css §6. Not part of any site. */
+    :root { --switcher-space: 0px; }
+    body.has-switcher { --switcher-space: 6rem; } /* CSS fallback; switcher.js sets the measured height inline on body */
+    .demo-switcher {
+      /* Sticky rather than fixed: it pins to the viewport bottom while scrolling, but at
+         the end of the document it settles into the space the canvas reserves for it,
+         so full-page captures and the final scroll position never show it over content. */
+      position: sticky;
+      bottom: 0;
+      margin-top: calc(-1 * var(--switcher-space));
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      padding: var(--space-3) var(--space-3) calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
+      pointer-events: none;
+    }
+    .demo-switcher .demo-controls { pointer-events: auto; max-width: 100%; justify-content: center; }
+    .demo-switcher .dc-label { white-space: normal; text-align: center; }
+    .demo-switcher .dc-row { display: inline-flex; align-items: center; gap: var(--space-2); }
+    /* Reserve the pill's height (plus its padding) inside the variant canvas so the
+       contact block and footer are never covered; the spacer inherits the canvas background. */
+    #site > .v-canvas::after { content: ""; display: block; height: var(--switcher-space); }
+    /* Live region stays in the document flow for assistive tech only. */
+    .demo-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: -1px; }
+  </style>
+</head>
+<body data-variant="a">
+
+<!-- Static baseline: variant A markup mirrors demo/variants/a.js and demo/content.js.
+     Usable with JavaScript disabled. app.js re-renders A/B/C into #site at runtime. -->
+<div id="site" data-variant="a">
+  <div class="v-canvas page">
+    <header class="hero">
+      <div class="identity">
+        <p class="eyebrow">Senior Software Developer</p>
+        <h1 class="name">Jeremy Fabre</h1>
+        <p class="tagline">Delivering quality software on budget.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#projects">View my projects</a>
+          <a class="btn btn-secondary" href="https://www.linkedin.com/in/jeremy-fabre-977b1b53/" rel="me noopener">Connect on LinkedIn</a>
+        </div>
+      </div>
+      <nav class="index" aria-labelledby="index-title">
+        <p class="index-title" id="index-title">Index</p>
+        <ol>
+          <li><a href="#project-shadowdark-sheet"><span class="n" aria-hidden="true">01</span><span class="index-label">The Dark Spire — TaleSpire Character Sheet</span></a></li>
+          <li><a href="#project-torchlight-timer"><span class="n" aria-hidden="true">02</span><span class="index-label">Darklight — Torchlight Timer</span></a></li>
+          <li><a href="#project-dungeon-mapper"><span class="n" aria-hidden="true">03</span><span class="index-label">Dungeon Mapper</span></a></li>
+          <li><a href="#project-npc-voice"><span class="n" aria-hidden="true">04</span><span class="index-label">NPC Voice</span></a></li>
+        </ol>
+      </nav>
+    </header>
+    <main class="page-main">
+      <section class="projects" id="projects" aria-labelledby="projects-heading">
+        <h2 class="section-heading" id="projects-heading">Selected projects</h2>
+        <p class="section-intro">A selection of personal projects built with AI-assisted development, from tabletop gaming tools to more ambitious applications that integrate AI directly.</p>
+        <ol class="project-list">
+          <li>
+            <article class="project" id="project-shadowdark-sheet" data-project="shadowdark-sheet" data-title="The Dark Spire — TaleSpire Character Sheet" data-description="A digital Shadowdark character sheet for TaleSpire and standalone browsers, bringing character stats, inventory, spells, and dice-roll integration together." data-ai-note="Built with AI-assisted development.">
+              <a class="frame frame-link" href="assets/projects/shadowdark-sheet.webp" aria-label="Open full-size image: The Dark Spire — TaleSpire Character Sheet">
+                <img class="frame-img" src="assets/projects/shadowdark-sheet.webp" alt="The Dark Spire — TaleSpire Character Sheet — screenshot of the project" decoding="async">
+              </a>
+              <div class="project-body">
+                <p class="project-n" aria-hidden="true">01</p>
+                <h3 class="title">The Dark Spire — TaleSpire Character Sheet</h3>
+                <p class="summary">A digital Shadowdark character sheet for TaleSpire and standalone browsers, bringing character stats, inventory, spells, and dice-roll integration together.</p>
+                <p class="meta"><span class="meta-stack">HTML · CSS · JavaScript</span><span class="meta-ai">Built with AI-assisted development.</span></p>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="project" id="project-torchlight-timer" data-project="torchlight-timer" data-title="Darklight — Torchlight Timer" data-description="An atmospheric countdown timer for torches and light spells in TaleSpire, with animated visuals, playback controls, and duration adjustments." data-ai-note="Built with AI-assisted development.">
+              <a class="frame frame-link" href="assets/projects/torchlight-timer.webp" aria-label="Open full-size image: Darklight — Torchlight Timer">
+                <img class="frame-img" src="assets/projects/torchlight-timer.webp" alt="Darklight — Torchlight Timer — screenshot of the project" decoding="async">
+              </a>
+              <div class="project-body">
+                <p class="project-n" aria-hidden="true">02</p>
+                <h3 class="title">Darklight — Torchlight Timer</h3>
+                <p class="summary">An atmospheric countdown timer for torches and light spells in TaleSpire, with animated visuals, playback controls, and duration adjustments.</p>
+                <p class="meta"><span class="meta-stack">HTML · CSS · JavaScript</span><span class="meta-ai">Built with AI-assisted development.</span></p>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="project" id="project-dungeon-mapper" data-project="dungeon-mapper" data-title="Dungeon Mapper" data-description="An agent-guided workflow for turning reviewed 2D dungeon descriptions into TaleSpire slabs, supported by deterministic validation, overlays, and export tools." data-ai-note="Built with AI-assisted development; AI assists the mapping workflow.">
+              <a class="frame frame-link" href="assets/projects/dungeon-mapper.webp" aria-label="Open full-size image: Dungeon Mapper">
+                <img class="frame-img" src="assets/projects/dungeon-mapper.webp" alt="Dungeon Mapper — screenshot of the project" decoding="async">
+              </a>
+              <div class="project-body">
+                <p class="project-n" aria-hidden="true">03</p>
+                <h3 class="title">Dungeon Mapper</h3>
+                <p class="summary">An agent-guided workflow for turning reviewed 2D dungeon descriptions into TaleSpire slabs, supported by deterministic validation, overlays, and export tools.</p>
+                <p class="meta"><span class="meta-stack">Python</span><span class="meta-ai">Built with AI-assisted development; AI assists the mapping workflow.</span></p>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="project" id="project-npc-voice" data-project="npc-voice" data-title="NPC Voice" data-description="A local prototype for AI-driven NPC conversations, with a web control panel and integrations for language generation, speech recognition, and voice synthesis. Discord voice integration is still in development." data-ai-note="Built with AI-assisted development; integrates AI dialogue and speech services.">
+              <a class="frame frame-link" href="assets/projects/npc-voice.webp" aria-label="Open full-size image: NPC Voice">
+                <img class="frame-img" src="assets/projects/npc-voice.webp" alt="NPC Voice — screenshot of the project" decoding="async">
+              </a>
+              <div class="project-body">
+                <p class="project-n" aria-hidden="true">04</p>
+                <h3 class="title">NPC Voice</h3>
+                <p class="summary">A local prototype for AI-driven NPC conversations, with a web control panel and integrations for language generation, speech recognition, and voice synthesis. Discord voice integration is still in development.</p>
+                <p class="meta"><span class="meta-stack">Elixir · Phoenix LiveView · JavaScript</span><span class="meta-ai">Built with AI-assisted development; integrates AI dialogue and speech services.</span></p>
+              </div>
+            </article>
+          </li>
+        </ol>
+      </section>
+      <section class="contact" aria-labelledby="contact-title">
+        <p class="eyebrow" id="contact-title">Contact</p>
+        <p class="contact-text">For professional opportunities or to request my CV, connect with me on LinkedIn.</p>
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/jeremy-fabre-977b1b53/" rel="me noopener">Connect on LinkedIn</a>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- Demo chrome (outside the site root). The switcher is built by switcher.js so a
+     no-JS visitor never sees dead controls. The live region announces the active variant. -->
+<p class="demo-status" id="demo-status" role="status" aria-live="polite" aria-atomic="true"></p>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
