@@ -169,3 +169,131 @@
 [data-variant="c"] .text-link { color: var(--c-copper); text-decoration: none; }
 [data-variant="c"] .text-link:hover,
 [data-variant="c"] .text-link.is-hover { text-decoration: underline; }
+
+/* =====================================================================================
+   Full variant page (demo/variants/c.js). Rules below extend the specimen contract above;
+   the showcase markup does not use .v-page / .has-image / .projects / .contact, so it is unaffected.
+   ===================================================================================== */
+
+/* ----- Page shell: full-bleed near-black, one padded column ----- */
+[data-variant="c"] .v-page {
+  padding-inline: clamp(var(--space-4), 4vw, var(--space-8));
+  padding-bottom: var(--space-10);
+}
+[data-variant="c"] .v-page .intro { padding-block: var(--space-12) var(--space-10); }
+[data-variant="c"] .v-page .name { overflow-wrap: anywhere; }
+
+/* ----- Projects section rhythm ----- */
+[data-variant="c"] .projects {
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--c-line);            /* decorative; heading carries the boundary */
+}
+[data-variant="c"] .section-intro {
+  margin: var(--space-5) auto 0;
+  max-width: 40rem;
+  text-align: center;
+  color: var(--c-muted);
+}
+[data-variant="c"] .projects .chapters {
+  margin-top: var(--space-10);
+  gap: var(--space-10);
+}
+
+/* ----- Live chapter frame: whole capture, never cropped, on an ambient backdrop ----- */
+[data-variant="c"] .chapter-head.has-image {
+  grid-template-rows: auto auto;                  /* small screens: image, then title band */
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--c-radius);
+}
+[data-variant="c"] .chapter-head.has-image > * { grid-area: auto; }
+[data-variant="c"] .chapter-head.has-image .shot {
+  --frame-ratio: 16 / 10;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  aspect-ratio: var(--frame-ratio);
+  overflow: hidden;
+  background: var(--c-surface);
+}
+[data-variant="c"] .chapter[data-orientation="portrait"] .chapter-head.has-image .shot { --frame-ratio: 4 / 5; }
+[data-variant="c"] .shot-backdrop {
+  position: absolute;
+  inset: -12%;
+  width: 124%;
+  height: 124%;
+  max-width: none;
+  object-fit: cover;
+  filter: blur(28px) saturate(.75) brightness(.45);
+  z-index: -2;
+}
+[data-variant="c"] .shot::after {                 /* warm tint so the blur reads as atmosphere */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(226, 164, 87, .08), rgba(13, 11, 9, .35));
+  pointer-events: none;
+}
+[data-variant="c"] .chapter-img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: var(--space-4);
+}
+[data-variant="c"] .chapter-head.has-image .scrim {
+  align-self: stretch;
+  opacity: 1;
+  padding: var(--space-4) var(--space-4) var(--space-5);
+  background: var(--c-scrim-mid);
+  border-top: 1px solid var(--c-line);
+}
+
+/* Tablet and up: the title scrim overlays the bottom of a wide 16:9 frame (DESIGN §4);
+   the image keeps bottom padding equal to the scrim band so nothing is occluded. */
+@media (min-width: 48em) {
+  [data-variant="c"] .v-page .intro { padding-block: var(--space-12); }
+  [data-variant="c"] .projects { padding-top: var(--space-10); }
+  [data-variant="c"] .projects .chapters { margin-top: var(--space-12); gap: var(--space-12); }
+
+  [data-variant="c"] .chapter-head.has-image { grid-template-rows: none; }
+  [data-variant="c"] .chapter-head.has-image > * { grid-area: 1 / 1; }
+  [data-variant="c"] .chapter-head.has-image .shot,
+  [data-variant="c"] .chapter[data-orientation="portrait"] .chapter-head.has-image .shot { --frame-ratio: 3 / 2; }
+  [data-variant="c"] .chapter-img { padding: var(--space-5) var(--space-5) calc(var(--space-12) + var(--space-8)); }
+  [data-variant="c"] .chapter-head.has-image .scrim {
+    align-self: end;
+    opacity: .85;
+    padding: var(--space-8) var(--space-6) var(--space-6);
+    background: linear-gradient(to top, var(--c-scrim) 0%, var(--c-scrim-mid) 45%, transparent 100%);
+    border-top: 0;
+  }
+  [data-variant="c"] .chapter:hover .chapter-head.has-image .scrim,
+  [data-variant="c"] .chapter.is-hover .chapter-head.has-image .scrim { opacity: 1; }
+}
+@media (min-width: 64em) {
+  [data-variant="c"] .chapter-head.has-image .shot { --frame-ratio: 16 / 9; }
+  [data-variant="c"] .chapter[data-orientation="portrait"] .chapter-head.has-image .shot { --frame-ratio: 3 / 2; }
+}
+
+/* ----- Chapter body additions ----- */
+[data-variant="c"] .chapter-body .full-image { display: inline-block; margin-top: var(--space-3); font-size: 0.9375rem; }
+
+/* ----- Contact: centred close ----- */
+[data-variant="c"] .contact {
+  max-width: 40rem;
+  margin: var(--space-12) auto 0;
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--c-line);
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-5);
+}
+[data-variant="c"] .contact-text { color: var(--c-text); }
+
+/* ----- Focus on dark imagery: add a dark halo so the ring reads over any pixel ----- */
+[data-variant="c"] .chapter :focus-visible { box-shadow: 0 0 0 6px var(--c-bg); }
