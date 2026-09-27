@@ -101,14 +101,7 @@
   padding-block: var(--space-6);
   border-bottom: 1px solid var(--b-rule);
 }
-@container (min-width: 40em) {
-  [data-variant="b"] .row {
-    grid-template-columns: 4rem minmax(0, 1fr) minmax(0, 1fr);
-    align-items: start;
-  }
-  [data-variant="b"] .row.is-alt .row-text { order: 3; }
-  [data-variant="b"] .row.is-alt .frame { order: 2; }
-}
+/* Row tiers are container queries; see "Full demo" below (they also drive the specimen). */
 [data-variant="b"] .ordinal {
   font-family: var(--b-font-serif);
   font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);   /* large text: 3.23:1 is acceptable */
@@ -141,3 +134,136 @@
 }
 [data-variant="b"] .text-link:hover,
 [data-variant="b"] .text-link.is-hover { text-decoration-thickness: 2px; }
+
+/* ===== Full demo (demo/variants/b.js) — extends the specimen above ===== */
+
+/* Opener closes on a double hairline: the magazine masthead rule */
+[data-variant="b"] .opener {
+  border-bottom: 1px solid var(--b-rule);
+  position: relative;
+}
+[data-variant="b"] .opener::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  border-bottom: 1px solid var(--b-rule);
+}
+
+/* Section rhythm: airy on small screens, taller on desktop */
+[data-variant="b"] .projects { padding-block: var(--space-8) var(--space-6); }
+[data-variant="b"] .contact { padding-block: var(--space-10) var(--space-12); }
+@media (min-width: 48em) {
+  [data-variant="b"] .opener { padding-block: var(--space-12) var(--space-10); }
+  [data-variant="b"] .projects { padding-block: var(--space-10) var(--space-8); }
+  [data-variant="b"] .contact { padding-block: var(--space-12); }
+}
+
+/* Section head: heading and intro sit as two columns on wide screens */
+[data-variant="b"] .section-head {
+  display: grid;
+  gap: var(--space-4) var(--space-6);
+  margin-bottom: var(--space-4);
+}
+[data-variant="b"] .section-head .section-heading { margin: 0; }
+[data-variant="b"] .intro { color: var(--b-muted); max-width: 40rem; }
+@media (min-width: 48em) {
+  [data-variant="b"] .section-head {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: end;
+  }
+  [data-variant="b"] .section-head .section-heading { grid-column: 1 / -1; }
+  [data-variant="b"] .intro { grid-column: 2; }
+}
+
+/* Rows are the container that the row grid queries */
+[data-variant="b"] .rows {
+  container-type: inline-size;
+  border-top: 1px solid var(--b-rule);
+}
+[data-variant="b"] .row { min-width: 0; }
+[data-variant="b"] .row > * { min-width: 0; }
+/* Tablet tier: ordinal sits above the text, image takes the other column */
+@container (min-width: 38em) {
+  [data-variant="b"] .row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--space-6);
+    padding-block: var(--space-8);
+    align-items: start;
+  }
+  [data-variant="b"] .row .ordinal { grid-column: 1; }
+  [data-variant="b"] .row .row-text { grid-column: 1; }
+  [data-variant="b"] .row > .figure,
+  [data-variant="b"] .row > .frame { grid-column: 2; grid-row: 1 / span 2; }
+  [data-variant="b"] .row.is-alt .ordinal,
+  [data-variant="b"] .row.is-alt .row-text { grid-column: 2; }
+  [data-variant="b"] .row.is-alt > .figure,
+  [data-variant="b"] .row.is-alt > .frame { grid-column: 1; }
+}
+/* Desktop tier: the ordinal earns its own column and grows with its glyphs
+   so long titles never collide with the number */
+@container (min-width: 52em) {
+  [data-variant="b"] .row {
+    grid-template-columns: minmax(4rem, max-content) minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--space-8);
+  }
+  [data-variant="b"] .row .ordinal { grid-column: 1; grid-row: 1; }
+  [data-variant="b"] .row .row-text { grid-column: 2; grid-row: 1; }
+  [data-variant="b"] .row > .figure,
+  [data-variant="b"] .row > .frame { grid-column: 3; grid-row: 1; }
+  [data-variant="b"] .row.is-alt .ordinal { grid-column: 1; }
+  [data-variant="b"] .row.is-alt .row-text { grid-column: 3; }
+  [data-variant="b"] .row.is-alt > .figure,
+  [data-variant="b"] .row.is-alt > .frame { grid-column: 2; }
+}
+[data-variant="b"] .ordinal { padding-right: var(--space-4); }
+[data-variant="b"] .row-text .title { margin-top: 0; }
+[data-variant="b"] .row .meta { display: grid; gap: var(--space-1); }
+[data-variant="b"] .row .meta .stack {
+  color: var(--b-ink);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Image figure: whole image visible on paper, caption link beneath */
+[data-variant="b"] .figure { display: grid; gap: var(--space-2); }
+[data-variant="b"] .frame-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: filter var(--dur) var(--ease);
+}
+[data-variant="b"] .frame-link:hover,
+[data-variant="b"] .frame-link.is-hover { filter: brightness(0.96); }
+[data-variant="b"] .frame.has-image img {
+  /* absolute so the frame's aspect-ratio height is definite for the image */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--b-paper);
+}
+[data-variant="b"] .frame-caption {
+  font-size: 0.875rem;
+  color: var(--b-muted);
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Contact: a serif closing line, then the single ink action */
+[data-variant="b"] .contact {
+  border-top: 2px solid var(--b-ink);
+  display: grid;
+  gap: var(--space-6);
+  justify-items: start;
+}
+[data-variant="b"] .contact-text {
+  font-family: var(--b-font-serif);
+  font-size: clamp(1.375rem, 1.1rem + 1.4vw, 2rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  max-width: 28em;
+}
