@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Portfolio design comparison — primitive showcase (no variant selected)</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/a.css">
+  <link rel="stylesheet" href="styles/b.css">
+  <link rel="stylesheet" href="styles/c.css">
+</head>
+<body class="spec">
+
+<header class="spec-header">
+  <h1>Primitive showcase — three directions, side by side</h1>
+  <p>Comparison spec for <code>DESIGN.md</code>. Each section renders its own tokens in isolation: heading, buttons, project text, image frame, and demo-switcher specimen, in default / hover / focus / long-title states. Hover and focus columns force the same rules that <code>:hover</code> and <code>:focus-visible</code> apply. Frames are labelled design frames, not project captures.</p>
+  <span class="spec-banner">No variant selected</span>
+  <div class="spec-nav">
+    <div class="demo-controls" role="group" aria-label="Demo controls — not part of the site">
+      <span class="dc-label">Demo controls — not part of the site</span>
+      <a class="dc-btn" href="#c-label" aria-label="Previous variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="dc-btn" href="#a-label">A</a>
+      <a class="dc-btn" href="#b-label">B</a>
+      <a class="dc-btn" href="#c-label">C</a>
+      <a class="dc-btn" href="#b-label" aria-label="Next variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ VARIANT A ============================ -->
+<section data-variant="a" aria-labelledby="a-label">
+  <div class="spec-label" id="a-label">A — Dark technical · split hero · horizontal rows · mono metadata</div>
+  <div class="v-canvas">
+
+    <div class="spec-block">
+      <div class="spec-block-title">Composition specimen</div>
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Senior Software Developer</p>
+          <h2 class="name">Jeremy Fabre</h2>
+          <p class="tagline">Delivering quality software on budget.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#a-projects">View my projects</a>
+            <a class="btn btn-secondary" href="https://www.linkedin.com/in/jeremy-fabre-977b1b53/">Connect on LinkedIn</a>
+          </div>
+        </div>
+        <nav class="index" aria-label="Project index specimen">
+          <p class="index-title">Index</p>
+          <ol>
+            <li><a href="#a-projects"><span class="n">01</span><span>The Dark Spire — TaleSpire Character Sheet</span></a></li>
+            <li><a href="#a-projects"><span class="n">02</span><span>Darklight — Torchlight Timer</span></a></li>
+            <li><a href="#a-projects"><span class="n">03</span><span>Dungeon Mapper</span></a></li>
+            <li><a href="#a-projects"><span class="n">04</span><span>NPC Voice</span></a></li>
+          </ol>
+        </nav>
+      </header>
+      <section class="projects" id="a-projects" aria-label="Project row specimen">
+        <h3 class="section-heading">Selected projects</h3>
+        <article class="project">
+          <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+          <div>
+            <h4 class="title">The Dark Spire — TaleSpire Character Sheet</h4>
+            <p class="summary">A digital Shadowdark character sheet for TaleSpire and standalone browsers, bringing character stats, inventory, spells, and dice-roll integration together.</p>
+            <p class="meta"><span>HTML · CSS · JavaScript</span><span>Built with AI-assisted development.</span></p>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <div class="spec-block">
+      <div class="spec-block-title">States</div>
+      <div class="spec-states">
+
+        <div class="spec-state">
+          <div class="spec-state-title">Default</div>
+          <h3 class="section-heading">Selected projects</h3>
+          <div class="actions"><button class="btn btn-primary" type="button">View my projects</button><button class="btn btn-secondary" type="button">Connect on LinkedIn</button></div>
+          <article class="project">
+            <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+            <div>
+              <h4 class="title">Dungeon Mapper</h4>
+              <p class="summary">An agent-guided workflow for turning reviewed 2D dungeon descriptions into TaleSpire slabs.</p>
+              <p class="meta"><span>Python</span><span>Built with AI-assisted development.</span></p>
+              <a class="text-link" href="#a-projects">View full image</a>
+            </div>
+          </article>
+          <div class="demo-controls" role="group" aria-label="Demo controls — not part of the site">
+            <span class="dc-label">Demo controls — not part of the site</span>
+            <button class="dc-btn" type="button" aria-label="Previous variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <a class="dc-btn" href="#a-label" aria-current="true">A</a>
+            <a class="dc-btn" href="#b-label">B</a>
+            <a class="dc-btn" href="#c-label">C</a>
+            <button class="dc-btn" type="button" aria-label="Next variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+
+        <div class="spec-state">
+          <div class="spec-state-title">Hover (forced)</div>
+          <h3 class="section-heading">Selected projects</h3>
+          <div class="actions"><button class="btn btn-primary is-hover" type="button">View my projects</button><button class="btn btn-secondary is-hover" type="button">Connect on LinkedIn</button></div>
+          <article class="project is-hover">
+            <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+            <div>
+              <h4 class="title">Dungeon Mapper</h4>
+              <p class="summary">An agent-guided workflow for turning reviewed 2D dungeon descriptions into TaleSpire slabs.</p>
+              <p class="meta"><span>Python</span><span>Built with AI-assisted development.</span></p>
+              <a class="text-link is-hover" href="#a-projects">View full image</a>
+            </div>
+          </article>
+          <div class="demo-controls" role="group" aria-label="Demo controls — not part of the site">
+            <span class="dc-label">Demo controls — not part of the site</span>
+            <button class="dc-btn is-hover" type="button" aria-label="Previous variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <a class="dc-btn" href="#a-label" aria-current="true">A</a>
+            <a class="dc-btn is-hover" href="#b-label">B</a>
+            <a class="dc-btn" href="#c-label">C</a>
+            <button class="dc-btn" type="button" aria-label="Next variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+
+        <div class="spec-state">
+          <div class="spec-state-title">Focus (forced :focus-visible)</div>
+          <h3 class="section-heading">Selected projects</h3>
+          <div class="actions"><button class="btn btn-primary is-focus" type="button">View my projects</button><button class="btn btn-secondary is-focus" type="button">Connect on LinkedIn</button></div>
+          <article class="project">
+            <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+            <div>
+              <h4 class="title">Dungeon Mapper</h4>
+              <p class="summary">An agent-guided workflow for turning reviewed 2D dungeon descriptions into TaleSpire slabs.</p>
+              <p class="meta"><span>Python</span><span>Built with AI-assisted development.</span></p>
+              <a class="text-link is-focus" href="#a-projects">View full image</a>
+            </div>
+          </article>
+          <div class="demo-controls" role="group" aria-label="Demo controls — not part of the site">
+            <span class="dc-label">Demo controls — not part of the site</span>
+            <button class="dc-btn" type="button" aria-label="Previous variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <a class="dc-btn" href="#a-label" aria-current="true">A</a>
+            <a class="dc-btn is-focus" href="#b-label">B</a>
+            <a class="dc-btn" href="#c-label">C</a>
+            <button class="dc-btn" type="button" aria-label="Next variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+
+        <div class="spec-state">
+          <div class="spec-state-title">Long title fixture</div>
+          <h3 class="section-heading">Selected projects</h3>
+          <div class="actions"><button class="btn btn-primary" type="button">View my projects</button><button class="btn btn-secondary" type="button">Connect on LinkedIn</button></div>
+          <article class="project">
+            <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+            <div>
+              <h4 class="title" data-fixture="long-title">The Dark Spire — TaleSpire Character Sheet with an extra long specimen title for overflow</h4>
+              <p class="summary">A digital Shadowdark character sheet for TaleSpire and standalone browsers, bringing character stats, inventory, spells, and dice-roll integration together.</p>
+              <p class="meta"><span>HTML · CSS · JavaScript</span><span>Built with AI-assisted development.</span></p>
+            </div>
+          </article>
+          <p class="spec-note">Title wraps with <code>overflow-wrap: anywhere</code>; no ellipsis on primary content.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ VARIANT B ============================ -->
+<section data-variant="b" aria-labelledby="b-label">
+  <div class="spec-label" id="b-label">B — Light editorial · stacked headline · numbered rows · alternating images</div>
+  <div class="v-canvas">
+
+    <div class="spec-block">
+      <div class="spec-block-title">Composition specimen</div>
+      <div class="page">
+        <header class="opener">
+          <h2 class="name">Jeremy Fabre</h2>
+          <p class="role">Senior Software Developer</p>
+          <p class="deck">Delivering quality software on budget.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#b-rows">View my projects</a>
+            <a class="btn btn-secondary" href="https://www.linkedin.com/in/jeremy-fabre-977b1b53/">Connect on LinkedIn</a>
+          </div>
+        </header>
+        <section id="b-rows" aria-label="Numbered row specimen">
+          <h3 class="section-heading">Selected projects</h3>
+          <div class="rows">
+            <article class="row">
+              <p class="ordinal">01</p>
+              <div class="row-text">
+                <h4 class="title">The Dark Spire — TaleSpire Character Sheet</h4>
+                <p class="summary">A digital Shadowdark character sheet for TaleSpire and standalone browsers, bringing character stats, inventory, spells, and dice-roll integration together.</p>
+                <p class="meta"><span>HTML · CSS · JavaScript</span><span>Built with AI-assisted development.</span></p>
+              </div>
+              <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+            </article>
+            <article class="row is-alt">
+              <p class="ordinal">02</p>
+              <div class="row-text">
+                <h4 class="title">Darklight — Torchlight Timer</h4>
+                <p class="summary">An atmospheric countdown timer for torches and light spells in TaleSpire, with animated visuals, playback controls, and duration adjustments.</p>
+                <p class="meta"><span>HTML · CSS · JavaScript</span><span>Built with AI-assisted development.</span></p>
+              </div>
+              <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="spec-block">
+      <div class="spec-block-title">States</div>
+      <div class="spec-states">
+
+        <div class="spec-state">
+          <div class="spec-state-title">Default</div>
+          <h3 class="section-heading">Selected projects</h3>
+          <div class="actions"><button class="btn btn-primary" type="button">View my projects</button><button class="btn btn-secondary" type="button">Connect on LinkedIn</button></div>
+          <article class="row">
+            <p class="ordinal">03</p>
+            <div class="row-text">
+              <h4 class="title">Dungeon Mapper</h4>
+              <p class="summary">An agent-guided workflow for turning reviewed 2D dungeon descriptions into TaleSpire slabs.</p>
+              <p class="meta"><span>Python</span><span>Built with AI-assisted development.</span></p>
+              <a class="text-link" href="#b-rows">View full image</a>
+            </div>
+            <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+          </article>
+          <div class="demo-controls" role="group" aria-label="Demo controls — not part of the site">
+            <span class="dc-label">Demo controls — not part of the site</span>
+            <button class="dc-btn" type="button" aria-label="Previous variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <a class="dc-btn" href="#a-label">A</a>
+            <a class="dc-btn" href="#b-label" aria-current="true">B</a>
+            <a class="dc-btn" href="#c-label">C</a>
+            <button class="dc-btn" type="button" aria-label="Next variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+
+        <div class="spec-state">
+          <div class="spec-state-title">Hover (forced)</div>
+          <h3 class="section-heading">Selected projects</h3>
+          <div class="actions"><button class="btn btn-primary is-hover" type="button">View my projects</button><button class="btn btn-secondary is-hover" type="button">Connect on LinkedIn</button></div>
+          <article class="row is-hover">
+            <p class="ordinal">03</p>
+            <div class="row-text">
+              <h4 class="title">Dungeon Mapper</h4>
+              <p class="summary">An agent-guided workflow for turning reviewed 2D dungeon descriptions into TaleSpire slabs.</p>
+              <p class="meta"><span>Python</span><span>Built with AI-assisted development.</span></p>
+              <a class="text-link is-hover" href="#b-rows">View full image</a>
+            </div>
+            <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+          </article>
+          <div class="demo-controls" role="group" aria-label="Demo controls — not part of the site">
+            <span class="dc-label">Demo controls — not part of the site</span>
+            <button class="dc-btn is-hover" type="button" aria-label="Previous variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <a class="dc-btn" href="#a-label">A</a>
+            <a class="dc-btn" href="#b-label" aria-current="true">B</a>
+            <a class="dc-btn is-hover" href="#c-label">C</a>
+            <button class="dc-btn" type="button" aria-label="Next variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+
+        <div class="spec-state">
+          <div class="spec-state-title">Focus (forced :focus-visible)</div>
+          <h3 class="section-heading">Selected projects</h3>
+          <div class="actions"><button class="btn btn-primary is-focus" type="button">View my projects</button><button class="btn btn-secondary is-focus" type="button">Connect on LinkedIn</button></div>
+          <article class="row">
+            <p class="ordinal">03</p>
+            <div class="row-text">
+              <h4 class="title">Dungeon Mapper</h4>
+              <p class="summary">An agent-guided workflow for turning reviewed 2D dungeon descriptions into TaleSpire slabs.</p>
+              <p class="meta"><span>Python</span><span>Built with AI-assisted development.</span></p>
+              <a class="text-link is-focus" href="#b-rows">View full image</a>
+            </div>
+            <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+          </article>
+          <div class="demo-controls" role="group" aria-label="Demo controls — not part of the site">
+            <span class="dc-label">Demo controls — not part of the site</span>
+            <button class="dc-btn" type="button" aria-label="Previous variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <a class="dc-btn" href="#a-label">A</a>
+            <a class="dc-btn" href="#b-label" aria-current="true">B</a>
+            <a class="dc-btn is-focus" href="#c-label">C</a>
+            <button class="dc-btn" type="button" aria-label="Next variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+
+        <div class="spec-state">
+          <div class="spec-state-title">Long title fixture</div>
+          <h3 class="section-heading">Selected projects</h3>
+          <div class="actions"><button class="btn btn-primary" type="button">View my projects</button><button class="btn btn-secondary" type="button">Connect on LinkedIn</button></div>
+          <article class="row">
+            <p class="ordinal">01</p>
+            <div class="row-text">
+              <h4 class="title" data-fixture="long-title">The Dark Spire — TaleSpire Character Sheet with an extra long specimen title for overflow</h4>
+              <p class="summary">A digital Shadowdark character sheet for TaleSpire and standalone browsers, bringing character stats, inventory, spells, and dice-roll integration together.</p>
+              <p class="meta"><span>HTML · CSS · JavaScript</span><span>Built with AI-assisted development.</span></p>
+            </div>
+            <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+          </article>
+          <p class="spec-note">Serif title wraps beside the ordinal; ordinal never overlaps text.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ VARIANT C ============================ -->
+<section data-variant="c" aria-labelledby="c-label">
+  <div class="spec-label" id="c-label">C — Dark immersive · centred intro · image-led chapters · amber/copper</div>
+  <div class="v-canvas">
+
+    <div class="spec-block">
+      <div class="spec-block-title">Composition specimen</div>
+      <header class="intro">
+        <p class="role">Senior Software Developer</p>
+        <h2 class="name">Jeremy Fabre</h2>
+        <p class="tagline">Delivering quality software on budget.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#c-chapters">View my projects</a>
+          <a class="btn btn-secondary" href="https://www.linkedin.com/in/jeremy-fabre-977b1b53/">Connect on LinkedIn</a>
+        </div>
+      </header>
+      <section class="chapters" id="c-chapters" aria-label="Chapter specimen">
+        <h3 class="section-heading">Selected projects</h3>
+        <article class="chapter">
+          <div class="chapter-head">
+            <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+            <div class="scrim">
+              <span class="numeral">Chapter 01</span>
+              <h4 class="title">The Dark Spire — TaleSpire Character Sheet</h4>
+            </div>
+          </div>
+          <div class="chapter-body">
+            <p class="summary">A digital Shadowdark character sheet for TaleSpire and standalone browsers, bringing character stats, inventory, spells, and dice-roll integration together.</p>
+            <p class="meta"><span>HTML · CSS · JavaScript</span><span>Built with AI-assisted development.</span></p>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <div class="spec-block">
+      <div class="spec-block-title">States</div>
+      <div class="spec-states">
+
+        <div class="spec-state">
+          <div class="spec-state-title">Default</div>
+          <h3 class="section-heading">Selected projects</h3>
+          <div class="actions"><button class="btn btn-primary" type="button">View my projects</button><button class="btn btn-secondary" type="button">Connect on LinkedIn</button></div>
+          <article class="chapter">
+            <div class="chapter-head">
+              <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+              <div class="scrim"><span class="numeral">Chapter 03</span><h4 class="title">Dungeon Mapper</h4></div>
+            </div>
+            <div class="chapter-body">
+              <p class="summary">An agent-guided workflow for turning reviewed 2D dungeon descriptions into TaleSpire slabs.</p>
+              <p class="meta"><span>Python</span><span>Built with AI-assisted development.</span></p>
+              <a class="text-link" href="#c-chapters">View full image</a>
+            </div>
+          </article>
+          <div class="demo-controls" role="group" aria-label="Demo controls — not part of the site">
+            <span class="dc-label">Demo controls — not part of the site</span>
+            <button class="dc-btn" type="button" aria-label="Previous variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <a class="dc-btn" href="#a-label">A</a>
+            <a class="dc-btn" href="#b-label">B</a>
+            <a class="dc-btn" href="#c-label" aria-current="true">C</a>
+            <button class="dc-btn" type="button" aria-label="Next variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+
+        <div class="spec-state">
+          <div class="spec-state-title">Hover (forced)</div>
+          <h3 class="section-heading">Selected projects</h3>
+          <div class="actions"><button class="btn btn-primary is-hover" type="button">View my projects</button><button class="btn btn-secondary is-hover" type="button">Connect on LinkedIn</button></div>
+          <article class="chapter is-hover">
+            <div class="chapter-head">
+              <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+              <div class="scrim"><span class="numeral">Chapter 03</span><h4 class="title">Dungeon Mapper</h4></div>
+            </div>
+            <div class="chapter-body">
+              <p class="summary">An agent-guided workflow for turning reviewed 2D dungeon descriptions into TaleSpire slabs.</p>
+              <p class="meta"><span>Python</span><span>Built with AI-assisted development.</span></p>
+              <a class="text-link is-hover" href="#c-chapters">View full image</a>
+            </div>
+          </article>
+          <div class="demo-controls" role="group" aria-label="Demo controls — not part of the site">
+            <span class="dc-label">Demo controls — not part of the site</span>
+            <button class="dc-btn is-hover" type="button" aria-label="Previous variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <a class="dc-btn is-hover" href="#a-label">A</a>
+            <a class="dc-btn" href="#b-label">B</a>
+            <a class="dc-btn" href="#c-label" aria-current="true">C</a>
+            <button class="dc-btn" type="button" aria-label="Next variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+
+        <div class="spec-state">
+          <div class="spec-state-title">Focus (forced :focus-visible)</div>
+          <h3 class="section-heading">Selected projects</h3>
+          <div class="actions"><button class="btn btn-primary is-focus" type="button">View my projects</button><button class="btn btn-secondary is-focus" type="button">Connect on LinkedIn</button></div>
+          <article class="chapter">
+            <div class="chapter-head">
+              <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+              <div class="scrim"><span class="numeral">Chapter 03</span><h4 class="title">Dungeon Mapper</h4></div>
+            </div>
+            <div class="chapter-body">
+              <p class="summary">An agent-guided workflow for turning reviewed 2D dungeon descriptions into TaleSpire slabs.</p>
+              <p class="meta"><span>Python</span><span>Built with AI-assisted development.</span></p>
+              <a class="text-link is-focus" href="#c-chapters">View full image</a>
+            </div>
+          </article>
+          <div class="demo-controls" role="group" aria-label="Demo controls — not part of the site">
+            <span class="dc-label">Demo controls — not part of the site</span>
+            <button class="dc-btn" type="button" aria-label="Previous variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <a class="dc-btn is-focus" href="#a-label">A</a>
+            <a class="dc-btn" href="#b-label">B</a>
+            <a class="dc-btn" href="#c-label" aria-current="true">C</a>
+            <button class="dc-btn" type="button" aria-label="Next variant"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+
+        <div class="spec-state">
+          <div class="spec-state-title">Long title fixture</div>
+          <h3 class="section-heading">Selected projects</h3>
+          <div class="actions"><button class="btn btn-primary" type="button">View my projects</button><button class="btn btn-secondary" type="button">Connect on LinkedIn</button></div>
+          <article class="chapter">
+            <div class="chapter-head">
+              <div class="frame"><span class="frame-label">Design frame — not a project capture</span></div>
+              <div class="scrim"><span class="numeral">Chapter 01</span><h4 class="title" data-fixture="long-title">The Dark Spire — TaleSpire Character Sheet with an extra long specimen title for overflow</h4></div>
+            </div>
+            <div class="chapter-body">
+              <p class="summary">A digital Shadowdark character sheet for TaleSpire and standalone browsers, bringing character stats, inventory, spells, and dice-roll integration together.</p>
+              <p class="meta"><span>HTML · CSS · JavaScript</span><span>Built with AI-assisted development.</span></p>
+            </div>
+          </article>
+          <p class="spec-note">Scrim grows with the title; the frame label stays visible above it.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="spec-footer">
+  <p>Showcase only. Not a site page, not a variant page. Theme selection is a separate, explicit decision and has not been made.</p>
+</footer>
+
+</body>
+</html>

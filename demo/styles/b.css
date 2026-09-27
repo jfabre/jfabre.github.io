@@ -1,0 +1,143 @@
+/* demo/styles/b.css — Variant B: Light editorial.
+   Every rule is scoped to [data-variant="b"]. Nothing here may target another variant. */
+
+[data-variant="b"] {
+  --b-bg: #f6f0e6;
+  --b-paper: #fbf7f0;
+  --b-ink: #1b1a1f;
+  --b-muted: #5e5a54;
+  --b-ordinal: #8b857c;
+  --b-rule: #cfc6b8;
+  --b-accent: #1d4ed8;
+  --b-on-ink: #f6f0e6;
+  --b-radius: 0;
+
+  --b-font-serif: ui-serif, "New York", "Iowan Old Style", Charter, Georgia, "Times New Roman", serif;
+  --b-font-sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --focus-ring-color: var(--b-accent);
+  --frame-fill: var(--b-paper);
+  --frame-line: var(--b-rule);
+  --frame-text: var(--b-muted);
+  --frame-ratio: 4 / 3;
+}
+
+[data-variant="b"] .v-canvas {
+  background: var(--b-bg);
+  color: var(--b-ink);
+  font-family: var(--b-font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+/* Asymmetric editorial margin */
+[data-variant="b"] .page {
+  max-width: 75rem;
+  margin-inline: auto;
+  padding-left: clamp(1rem, 8vw, 7rem);
+  padding-right: clamp(1rem, 4vw, 3rem);
+}
+
+/* ----- Opener: oversized stacked headline ----- */
+[data-variant="b"] .opener { padding-block: var(--space-10) var(--space-8); }
+[data-variant="b"] .name {
+  font-family: var(--b-font-serif);
+  font-size: clamp(2.75rem, 1.6rem + 6vw, 6rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+[data-variant="b"] .role {
+  font-family: var(--b-font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1.1rem + 2.4vw, 2.75rem);
+  line-height: 1.1;
+  margin-top: var(--space-2);
+}
+[data-variant="b"] .deck {
+  margin-top: var(--space-5);
+  max-width: 34rem;
+  color: var(--b-muted);
+  font-size: 1.125rem;
+}
+[data-variant="b"] .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+/* ----- Buttons ----- */
+[data-variant="b"] .btn {
+  border-radius: var(--b-radius);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+}
+[data-variant="b"] .btn-primary { background: var(--b-ink); color: var(--b-on-ink); border-color: var(--b-ink); }
+[data-variant="b"] .btn-primary:hover,
+[data-variant="b"] .btn-primary.is-hover { background: var(--b-accent); border-color: var(--b-accent); }
+[data-variant="b"] .btn-secondary { background: transparent; color: var(--b-ink); border-color: var(--b-ink); }
+[data-variant="b"] .btn-secondary:hover,
+[data-variant="b"] .btn-secondary.is-hover { background: color-mix(in srgb, var(--b-ink) 8%, transparent); }
+
+/* ----- Section heading ----- */
+[data-variant="b"] .section-heading {
+  font-family: var(--b-font-serif);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  padding-bottom: var(--space-3);
+  border-bottom: 2px solid var(--b-ink);
+}
+
+/* ----- Numbered magazine rows, alternating on desktop ----- */
+[data-variant="b"] .rows { display: grid; }
+[data-variant="b"] .row {
+  display: grid;
+  gap: var(--space-4) var(--space-6);
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--b-rule);
+}
+@container (min-width: 40em) {
+  [data-variant="b"] .row {
+    grid-template-columns: 4rem minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+  [data-variant="b"] .row.is-alt .row-text { order: 3; }
+  [data-variant="b"] .row.is-alt .frame { order: 2; }
+}
+[data-variant="b"] .ordinal {
+  font-family: var(--b-font-serif);
+  font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);   /* large text: 3.23:1 is acceptable */
+  line-height: 0.9;
+  color: var(--b-ordinal);
+  transition: color var(--dur) var(--ease);
+}
+[data-variant="b"] .row:hover .ordinal,
+[data-variant="b"] .row.is-hover .ordinal { color: var(--b-accent); }
+[data-variant="b"] .row .title {
+  font-family: var(--b-font-serif);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+[data-variant="b"] .row .summary { margin-top: var(--space-3); color: var(--b-muted); }
+[data-variant="b"] .row .meta {
+  margin-top: var(--space-3);
+  font-size: 0.875rem;
+  color: var(--b-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+[data-variant="b"] .text-link {
+  color: var(--b-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-thickness var(--dur) var(--ease);
+}
+[data-variant="b"] .text-link:hover,
+[data-variant="b"] .text-link.is-hover { text-decoration-thickness: 2px; }
