@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Publication origin. Changing the host is a content edit here, in robots.txt and in
+     the canonical link of index.html. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://jfabre.github.io/</loc>
+  </url>
+</urlset>
