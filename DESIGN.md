@@ -1,6 +1,20 @@
-# DESIGN.md — Portfolio comparison spec (three directions, none selected)
+# DESIGN.md — Portfolio design spec (B selected; A/C kept as comparison record)
 
-Status: **comparison specification**. Three independent design directions (A, B, C) are specified side by side so they can be built as separate demos and compared fairly. **No variant is selected.** Nothing in this document is approval of any direction; selection is a separate, explicit user decision recorded later in the plan.
+Status: **B, Light editorial, is the selected direction** (user choice recorded 2026-09-27 in `.omo/drafts/portfolio-demo-selection.md`: `selected: B`, `scope: unchanged`). Section 3 is now the production contract for `site/`. Sections 2 and 4 (A and C) are retained unchanged as the comparison record and are not built.
+
+Production notes (task 11, 2026-09-30):
+
+- `site/styles.css` is §1 foundations plus §3 merged into one unscoped stylesheet: the `[data-variant="b"]` scope and `--b-` prefixes are dropped (`--bg`, `--ink`, `--accent`, …), the demo switcher and showcase chrome (§1.4, §7) do not exist, and the placeholder frame stripes are removed because real captures ship. Values are otherwise identical to §3.
+- Layout tiers are container queries on `.rows`: single column, two columns at 38em (ordinal + text / image), three columns with alternation at 52em (`.is-alt` swaps text and image columns).
+- Added primitives: `.skip-link` (ink on off-white, revealed on `:focus-visible`), `.not-found` for `404.html` reusing `.ordinal`, `.name`, `.role`, `.deck`, `.btn`.
+- Canonical URL `https://jfabre.github.io/` lives in `site/index.html`, `site/sitemap.xml` and `site/robots.txt` only. Changing the host is a content edit in those three files; no runtime code depends on it.
+- The CV remark in the user's choice did not add scope: no timeline, dates, employers, or downloadable CV. CV requests stay on the approved LinkedIn sentence.
+
+---
+
+Original comparison preamble follows.
+
+Status at comparison time: three independent design directions (A, B, C) were specified side by side so they could be built as separate demos and compared fairly.
 
 Scope of this file: shared accessibility and spacing foundations (`demo/styles/base.css`), and three isolated token/type/layout contracts (`demo/styles/a.css`, `b.css`, `c.css`). The primitive showcase that proves the contracts is `demo/showcase.html`. Final variant pages, content module, integration switcher, and the production `site/` are out of scope here.
 
@@ -229,4 +243,4 @@ Pill labelled **"Demo controls — not part of the site"**. Contains previous, A
 - Focus ring uses `outline` only; a double ring (outline + box-shadow halo) may be added if a variant's background makes a single ring weak on real imagery.
 - Contrast on the C chapter scrim is verified against the solid scrim colour, not against arbitrary photographs; task 8 must re-verify with the real images.
 
-**Reminder: no variant is selected.**
+**Selection record: B was selected on 2026-09-27 and built into `site/` in task 11. The comparison sections above are historical.**

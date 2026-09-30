@@ -2,6 +2,13 @@ import { readdirSync, readFileSync, lstatSync } from 'node:fs';
 import { resolve, relative, dirname, extname, sep } from 'node:path';
 
 const linkedIn = 'https://www.linkedin.com/in/jeremy-fabre-977b1b53/';
+// Publication origin. Allowed only as an exact self-reference in three places:
+// <link rel="canonical"> in HTML, <loc> in a root sitemap.xml, and the Sitemap: line
+// of a root robots.txt. Changing the host is a content edit in those three files.
+const publication = 'https://jfabre.github.io/';
+const sitemapUrl = `${publication}sitemap.xml`;
+// XML namespace identifiers are not fetched; they are allowed only as exact xmlns values.
+const namespaces = { '.svg': 'http://www.w3.org/2000/svg', '.xml': 'http://www.sitemaps.org/schemas/sitemap/0.9' };
 const ids = ['shadowdark-sheet', 'torchlight-timer', 'dungeon-mapper', 'npc-voice'];
 const required = [
   'Jeremy Fabre', 'Senior Software Developer', 'Delivering quality software on budget.',
@@ -27,6 +34,27 @@ function serverDocs(text) {
   const lines = text.trim().split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
   return lines.length > 0 && lines.every((line) =>
     /^(?:# Local preview|```(?:sh|bash)?|python3 -m http\.server \d+ --bind 127\.0\.0\.1 --directory (?:demo|site)|http:\/\/127\.0\.0\.1:\d+\/(?:\?variant=[ABC])?)$/.test(line));
+}
+
+// Replace exact, sanctioned self-references with a neutral marker so the URL scan never
+// sees them. Anything that does not match these exact forms stays in the text and fails.
+function stripSelfReferences(label, text) {
+  const ext = extname(label).toLowerCase();
+  const escape = (value) => value.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
+  let out = text;
+  if (ext === '.html') {
+    out = out.replace(new RegExp(`<link\\s+rel="canonical"\\s+href="${escape(publication)}"\\s*/?>`, 'g'), '<link data-self-reference>');
+  }
+  if (label === 'sitemap.xml') {
+    out = out.replace(new RegExp(`<loc>${escape(publication)}</loc>`, 'g'), '<loc>self-reference</loc>');
+  }
+  if (label === 'robots.txt') {
+    out = out.replace(new RegExp(`^Sitemap: ${escape(sitemapUrl)}$`, 'gm'), 'Sitemap: self-reference');
+  }
+  if (namespaces[ext] && (ext === '.svg' || label === 'sitemap.xml')) {
+    out = out.replace(new RegExp(`xmlns="${escape(namespaces[ext])}"`, 'g'), 'xmlns="namespace"');
+  }
+  return out;
 }
 
 function check(root) {
@@ -71,7 +99,7 @@ function check(root) {
   }
 
   for (const { file, label, text } of texts) {
-    const normalized = decode(text);
+    const normalized = stripSelfReferences(label, decode(text));
     if (/\/Users\/|[A-Z]:\\|github\.com/i.test(normalized)) reject(`${label}: private source URL or path`);
     for (const match of normalized.matchAll(/(?:[a-z][a-z\d+.-]*:\/\/|(?:mailto|tel|sms|javascript|data|ftp|file):|(?<!:)\/\/)[^\s<>"'`)}\]]+/gi)) {
       if (match[0] !== linkedIn) reject(`${label}: disallowed URL`);

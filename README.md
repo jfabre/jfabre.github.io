@@ -1,8 +1,9 @@
 # Portfolio — private local preview
 
 This is a local preview only. No remote deployment occurs. No remote is configured,
-and prototype history must not be pushed. The theme is not selected. Only the
-workspace and verification scaffold exist; the three demos are later work.
+and prototype history must not be pushed. No design is selected. The three demos
+are on the loopback server below. Production stays stopped until you name A, B, C,
+or an approved hybrid.
 
 ## Preview safely
 
@@ -25,22 +26,23 @@ a port. Keep the bind address `127.0.0.1`; never bind `0.0.0.0`.
 Use Ctrl-C for a foreground server. For a background server record `$!` immediately,
 then stop only that PID with `kill "$server_pid"` and `wait "$server_pid"`.
 
-Verify the selected port (substitute its number for `<port>`):
+A preview is already running on port 8000, bound to `127.0.0.1` only.
+No design is selected. No remote deployment occurs. Open:
+
+- `http://127.0.0.1:8000/?variant=A`
+- `http://127.0.0.1:8000/?variant=B`
+- `http://127.0.0.1:8000/?variant=C`
+
+Confirm the listener:
 
 ```sh
-lsof -nP -iTCP:<port> -sTCP:LISTEN
-curl -sS -D - --max-time 5 http://127.0.0.1:<port>/
+lsof -nP -iTCP:8000 -sTCP:LISTEN
+curl -sS -D - --max-time 5 http://127.0.0.1:8000/?variant=A
 ```
 
-The listener must show `127.0.0.1:<port>`, not `*:<port>`. If a start fails because
+The listener must show `127.0.0.1:8000`, not `*:8000`. If a later start fails because
 another process acquired the port, leave that process alone and choose another.
-Once later tasks exist, direct URLs will be `http://127.0.0.1:<port>/?variant=A|B|C`:
-
-- `http://127.0.0.1:<port>/?variant=A`
-- `http://127.0.0.1:<port>/?variant=B`
-- `http://127.0.0.1:<port>/?variant=C`
-
-Right now the server provides an empty scaffold, not a portfolio.
+Do not bind `0.0.0.0`.
 
 ## Executable checks
 
@@ -52,11 +54,11 @@ node scripts/check-static.mjs site
 ```
 
 The checker accepts exactly one directory argument. Exit 0 means every static
-assertion passed; exit 1 prints a reason list to stderr. **The incomplete `demo/`
-must fail** until later tasks provide all required copy, ordered project markup,
-and actual assets. Self-tests instead create disposable complete fixtures in the
-system temporary directory and delete them after each test. Fake fixture image
-bytes prove file existence only; they are never portfolio imagery.
+assertion passed; exit 1 prints a reason list to stderr. `demo/` now passes
+`node scripts/check-static.mjs demo`. That pass is not a design choice, and it
+does not create a production site. Self-tests create disposable complete fixtures
+in the system temporary directory and delete them after each test. Fake fixture
+image bytes prove file existence only; they are never portfolio imagery.
 
 The checker uses Node built-ins, does not access the network or execute scanned
 code, and scans HTML, JS, MJS, CSS, SVG, TXT, XML, and Markdown. A root README is

@@ -1,0 +1,347 @@
+/* site/styles.css — Jeremy Fabre portfolio, selected direction B: Light editorial.
+   Single stylesheet: shared foundations (reset, spacing, focus, targets, motion policy)
+   merged with the B token, type and layout contract from DESIGN.md §3. No other
+   direction and no demo chrome exists here. Fonts are OS stacks; nothing is fetched. */
+
+/* ---------- 1. Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 100%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p, figure { margin: 0; }
+ol { margin: 0; padding: 0; list-style: none; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+
+/* ---------- 2. Tokens ---------- */
+:root {
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-10: 4rem;
+  --space-12: 6rem;
+
+  --target-min: 2.75rem;                /* 44px minimum interactive target */
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 3px;
+
+  --dur: 180ms;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --measure: 65ch;
+
+  --bg: #f6f0e6;
+  --paper: #fbf7f0;
+  --ink: #1b1a1f;
+  --muted: #5e5a54;
+  --ordinal: #8b857c;
+  --rule: #cfc6b8;
+  --accent: #1d4ed8;
+  --on-ink: #f6f0e6;
+  --radius: 0;
+
+  --font-serif: ui-serif, "New York", "Iowan Old Style", Charter, Georgia, "Times New Roman", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --focus-ring-color: var(--accent);
+  --frame-fill: var(--paper);
+  --frame-line: var(--rule);
+  --frame-ratio: 4 / 3;
+}
+
+/* ---------- 3. Accessibility contract ---------- */
+:focus { outline: none; }               /* replaced by :focus-visible below, never removed */
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  background: var(--ink);
+  color: var(--on-ink);
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--dur) var(--ease);
+  z-index: 10;
+}
+.skip-link:focus-visible { transform: none; }
+
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- 4. Page canvas ---------- */
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+p { max-width: var(--measure); }
+.title { overflow-wrap: anywhere; hyphens: manual; }
+
+/* Asymmetric editorial margin */
+.page {
+  max-width: 75rem;
+  margin-inline: auto;
+  padding-left: clamp(1rem, 8vw, 7rem);
+  padding-right: clamp(1rem, 4vw, 3rem);
+}
+
+/* ---------- 5. Buttons and links ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--target-min);
+  min-width: var(--target-min);
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+.btn-secondary { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-secondary:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); }
+
+.text-link {
+  padding-block: var(--space-1);
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: text-decoration-thickness var(--dur) var(--ease);
+}
+.text-link:hover { text-decoration-thickness: 2px; }
+
+/* ---------- 6. Opener: oversized stacked headline ---------- */
+.opener {
+  padding-block: var(--space-10) var(--space-8);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+/* Double hairline: the magazine masthead rule */
+.opener::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  border-bottom: 1px solid var(--rule);
+}
+.name {
+  font-family: var(--font-serif);
+  font-size: clamp(2.75rem, 1.6rem + 6vw, 6rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+.role {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1.1rem + 2.4vw, 2.75rem);
+  line-height: 1.1;
+  margin-top: var(--space-2);
+}
+.deck {
+  margin-top: var(--space-5);
+  max-width: 34rem;
+  color: var(--muted);
+  font-size: 1.125rem;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+/* ---------- 7. Section rhythm ---------- */
+.projects { padding-block: var(--space-8) var(--space-6); }
+.contact { padding-block: var(--space-10) var(--space-12); }
+@media (min-width: 48em) {
+  .opener { padding-block: var(--space-12) var(--space-10); }
+  .projects { padding-block: var(--space-10) var(--space-8); }
+  .contact { padding-block: var(--space-12); }
+}
+
+/* Section head: heading and intro sit as two columns on wide screens */
+.section-head {
+  display: grid;
+  gap: var(--space-4) var(--space-6);
+  margin-bottom: var(--space-4);
+}
+.section-heading {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  padding-bottom: var(--space-3);
+  border-bottom: 2px solid var(--ink);
+}
+.intro { color: var(--muted); max-width: 40rem; }
+@media (min-width: 48em) {
+  .section-head {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: end;
+  }
+  .section-head .section-heading { grid-column: 1 / -1; }
+  .intro { grid-column: 2; }
+}
+
+/* ---------- 8. Numbered magazine rows, alternating on desktop ---------- */
+.rows {
+  display: grid;
+  container-type: inline-size;
+  border-top: 1px solid var(--rule);
+}
+.row {
+  display: grid;
+  gap: var(--space-4) var(--space-6);
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--rule);
+  min-width: 0;
+}
+.row > * { min-width: 0; }
+.ordinal {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);   /* large text: 3.23:1 is acceptable */
+  line-height: 0.9;
+  color: var(--ordinal);
+  padding-right: var(--space-4);
+  transition: color var(--dur) var(--ease);
+}
+.row:hover .ordinal { color: var(--accent); }
+.row .title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+.row .summary { margin-top: var(--space-3); color: var(--muted); }
+.row .meta {
+  margin-top: var(--space-3);
+  display: grid;
+  gap: var(--space-1);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.row .meta .stack {
+  color: var(--ink);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Tablet tier: ordinal sits above the text, image takes the other column */
+@container (min-width: 38em) {
+  .row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--space-6);
+    padding-block: var(--space-8);
+    align-items: start;
+  }
+  .row .ordinal { grid-column: 1; }
+  .row .row-text { grid-column: 1; }
+  .row > .figure { grid-column: 2; grid-row: 1 / span 2; }
+  .row.is-alt .ordinal,
+  .row.is-alt .row-text { grid-column: 2; }
+  .row.is-alt > .figure { grid-column: 1; }
+}
+/* Desktop tier: the ordinal earns its own column and grows with its glyphs
+   so long titles never collide with the number */
+@container (min-width: 52em) {
+  .row {
+    grid-template-columns: minmax(4rem, max-content) minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--space-8);
+  }
+  .row .ordinal { grid-column: 1; grid-row: 1; }
+  .row .row-text { grid-column: 2; grid-row: 1; }
+  .row > .figure { grid-column: 3; grid-row: 1; }
+  .row.is-alt .ordinal { grid-column: 1; }
+  .row.is-alt .row-text { grid-column: 3; }
+  .row.is-alt > .figure { grid-column: 2; }
+}
+
+/* ---------- 9. Image figure: whole image visible on paper, caption link beneath ---------- */
+.figure { display: grid; gap: var(--space-2); }
+.frame-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: filter var(--dur) var(--ease);
+}
+.frame-link:hover { filter: brightness(0.96); }
+.frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--frame-ratio);
+  overflow: hidden;
+  background: var(--frame-fill);
+  border: 1px solid var(--frame-line);
+}
+.frame img {
+  /* absolute so the frame's aspect-ratio height is definite for the image */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.frame-caption {
+  font-size: 0.875rem;
+  color: var(--muted);
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ---------- 10. Contact: a serif closing line, then the single ink action ---------- */
+.contact {
+  border-top: 2px solid var(--ink);
+  display: grid;
+  gap: var(--space-6);
+  justify-items: start;
+}
+.contact-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.375rem, 1.1rem + 1.4vw, 2rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  max-width: 28em;
+}
+
+/* ---------- 11. Not-found page ---------- */
+.not-found { min-height: 100vh; display: grid; align-content: center; padding-block: var(--space-10); }
+.not-found .role { margin-top: var(--space-3); }
+
+/* ---------- 12. Motion policy ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .btn:active { transform: none; }
+}

@@ -61,6 +61,40 @@ for (const [name, addition, reason] of [
   ['base URL override', '<base href="elsewhere/">', /base element/i],
 ]) test(`${name} is rejected`, (t) => run(t, [fixture(t, (html) => html + addition)], 1, reason));
 
+const publication = 'https://jfabre.github.io/';
+const canonical = `<link rel="canonical" href="${publication}">`;
+test('publication origin is accepted as an exact canonical link', (t) => run(t,
+  [fixture(t, (html) => html.replace('<body>', `<head>${canonical}</head><body>`))], 0));
+test('publication sitemap and robots self-references are accepted', (t) => {
+  const root = fixture(t, (html) => html.replace('<body>', `<head>${canonical}</head><body>`));
+  writeFileSync(join(root, 'sitemap.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${publication}</loc></url>\n</urlset>\n`);
+  writeFileSync(join(root, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${publication}sitemap.xml\n`);
+  writeFileSync(join(root, 'favicon.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32"/></svg>');
+  run(t, [root], 0);
+});
+for (const [name, addition] of [
+  ['publication origin outside a canonical link', `<a href="${publication}">Home</a>`],
+  ['publication origin as bare text', publication],
+  ['publication subpath in a canonical link', canonical.replace(publication, `${publication}about/`)],
+  ['other https origin in a canonical link', canonical.replace(publication, 'https://example.com/')],
+  ['other https origin', 'https://example.com/'],
+  ['private repository URL beside a canonical link', `${canonical}https://github.com/jfabre/jfabre.github.io`],
+  ['data URL', '<img src="data:image/svg+xml,%3Csvg%3E" alt="">'],
+]) test(`${name} is rejected`, (t) => run(t, [fixture(t, (html) => html + addition)], 1, /disallowed URL|private source|asset/i));
+test('sitemap with a foreign location is rejected', (t) => {
+  const root = fixture(t);
+  writeFileSync(join(root, 'sitemap.xml'), '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://example.com/</loc></url></urlset>');
+  run(t, [root], 1, /disallowed URL/i);
+});
+test('robots pointing at a foreign sitemap is rejected', (t) => {
+  const root = fixture(t);
+  writeFileSync(join(root, 'robots.txt'), 'User-agent: *\nSitemap: https://example.com/sitemap.xml\n');
+  run(t, [root], 1, /disallowed URL/i);
+});
+test('sitemap namespace is not accepted in an HTML file', (t) => run(t,
+  [fixture(t, (html) => html + '<div xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></div>')], 1, /disallowed URL/i));
+
 test('wrong LinkedIn URL is rejected', (t) => run(t,
   [fixture(t, (html) => html.replaceAll(linkedIn, 'https://www.linkedin.com/in/someone-else/'))],
   1, /required copy|disallowed URL/i));
