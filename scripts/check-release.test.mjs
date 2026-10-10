@@ -9,9 +9,10 @@ const project = fileURLToPath(new URL('../', import.meta.url));
 const checker = join(project, 'scripts/check-release.mjs');
 const temporaryRoot = '/var/folders/19/80jmtml94bs4ph996yqqbztm0000gn/T/opencode';
 const files = [
-  '.nojekyll', '404.html', 'favicon.svg', 'index.html', 'robots.txt', 'sitemap.xml', 'styles.css',
+  '.nojekyll', '404.html', 'favicon.svg', 'index.html', 'robots.txt', 'sitemap.xml', 'styles.css', 'carousel.js',
   'assets/projects/shadowdark-sheet.webp', 'assets/projects/torchlight-timer.webp',
   'assets/projects/dungeon-mapper.webp', 'assets/projects/npc-voice.webp',
+  'assets/projects/shadowdark-party.webp', 'assets/projects/shadowdark-equipment.webp', 'assets/projects/torchlight-spell.webp', 'assets/projects/torchlight-board.webp', 'assets/projects/npc-session.webp', 'assets/projects/npc-transcript.webp',
 ];
 
 function fixture(t) {

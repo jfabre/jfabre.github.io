@@ -12,9 +12,7 @@ const copy = [
   'Jeremy Fabre',
   'Senior Software Developer',
   'Delivering quality software on budget.',
-  'Selected projects',
   'A selection of personal projects built with AI-assisted development, from tabletop gaming tools to more ambitious applications that integrate AI directly.',
-  'View my projects',
   'Connect on LinkedIn',
   linkedIn,
   'For professional opportunities or to request my CV, connect with me on LinkedIn.',
@@ -168,10 +166,10 @@ test('shared content exports the exact approved identity, section and contact', 
   assert.deepEqual(identity, {
     name: 'Jeremy Fabre', role: 'Senior Software Developer', tagline: 'Delivering quality software on budget.',
   });
-  assert.deepEqual(section, { heading: copy[3], intro: copy[4] });
+  assert.deepEqual(section, { heading: 'Selected projects', intro: copy[3] });
   assert.deepEqual(contact, {
     ctaLabel: 'View my projects', ctaHref: '#projects', label: 'Connect on LinkedIn',
-    href: linkedIn, text: copy[8],
+    href: linkedIn, text: copy[6],
   });
 });
 

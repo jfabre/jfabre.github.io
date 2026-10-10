@@ -1,9 +1,10 @@
-# Portfolio — private local preview
+# Portfolio
 
-This is a local preview only. No remote deployment occurs. No remote is configured,
-and prototype history must not be pushed. No design is selected. The three demos
-are on the loopback server below. Production stays stopped until you name A, B, C,
-or an approved hybrid.
+Source for https://jfabre.github.io/. Pushing to `main` runs
+`.github/workflows/pages.yml`, which checks and publishes only `site/` to GitHub
+Pages. Everything else in this repository is never served. Direction B (light editorial) is selected;
+the production page lives in `site/`. The three comparison demos remain in `demo/`
+as a record.
 
 ## Preview safely
 
@@ -17,8 +18,10 @@ lsof -nP -iTCP:8000 -sTCP:LISTEN
 If port 8000 is free, start:
 
 ```sh
-python3 -m http.server 8000 --bind 127.0.0.1 --directory demo
+python3 -m http.server 8000 --bind 127.0.0.1 --directory site
 ```
+
+Use `--directory demo` instead to open the A/B/C comparison record.
 
 If port 8000 is busy, pick another free loopback port and record the selected port
 and your server PID in private evidence. Never kill an unrelated process to free
@@ -26,18 +29,14 @@ a port. Keep the bind address `127.0.0.1`; never bind `0.0.0.0`.
 Use Ctrl-C for a foreground server. For a background server record `$!` immediately,
 then stop only that PID with `kill "$server_pid"` and `wait "$server_pid"`.
 
-A preview is already running on port 8000, bound to `127.0.0.1` only.
-No design is selected. No remote deployment occurs. Open:
-
-- `http://127.0.0.1:8000/?variant=A`
-- `http://127.0.0.1:8000/?variant=B`
-- `http://127.0.0.1:8000/?variant=C`
+Open `http://127.0.0.1:8000/`. For the demo record, open `?variant=A`, `?variant=B`
+or `?variant=C`. No remote deployment occurs.
 
 Confirm the listener:
 
 ```sh
 lsof -nP -iTCP:8000 -sTCP:LISTEN
-curl -sS -D - --max-time 5 http://127.0.0.1:8000/?variant=A
+curl -sS -D - --max-time 5 http://127.0.0.1:8000/
 ```
 
 The listener must show `127.0.0.1:8000`, not `*:8000`. If a later start fails because
@@ -47,10 +46,9 @@ Do not bind `0.0.0.0`.
 ## Executable checks
 
 ```sh
-node --test scripts/check-static.test.mjs
-node scripts/check-static.mjs demo
-# Later, after a selected site exists:
+node --test scripts/check-static.test.mjs scripts/check-release.test.mjs scripts/check-gallery.test.mjs
 node scripts/check-static.mjs site
+node scripts/check-static.mjs demo
 ```
 
 The checker accepts exactly one directory argument. Exit 0 means every static
@@ -73,7 +71,9 @@ markup assets resolve from that tree's root; CSS URLs resolve from the styleshee
 Quoted and unquoted attributes are supported. Keep project hooks literal and
 unique; computed JS templates are not evaluated. Symbolic links, private files,
 base overrides, external assets and nonapproved contact URLs fail closed.
-Only the exact approved LinkedIn URL is allowed externally.
+Only the exact approved LinkedIn and GitHub profile URLs are allowed externally.
+`scripts/check-gallery.test.mjs` pins the site galleries: 3/3/1/3 slides, a caption on
+every feature slide, unique local images, and the unchanged Dungeon Mapper image.
 
 This is a static contract check, not a full HTML parser, image decoder, browser
 test, or complete security audit. Later work still requires rendered-page QA and
@@ -86,4 +86,4 @@ Planning, source snapshots, scratch/capture directories, caches, environment
 files, databases, and keys are ignored. Ignore rules are not a substitute for
 reviewing staged paths. Never use blanket staging. Only explicitly reviewed
 public scaffold files may enter local prototype history; no private working data
-may be staged. Nothing here authorizes publication or theme selection.
+may be staged.

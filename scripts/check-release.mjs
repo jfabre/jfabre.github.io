@@ -6,9 +6,10 @@ import { fileURLToPath } from 'node:url';
 // Deliberately closed: adding public files requires updating this reviewed list.
 const files = new Set([
   'README.md', 'docs/.nojekyll', 'docs/404.html', 'docs/favicon.svg', 'docs/index.html',
-  'docs/robots.txt', 'docs/sitemap.xml', 'docs/styles.css',
+  'docs/robots.txt', 'docs/sitemap.xml', 'docs/styles.css', 'docs/carousel.js',
   'docs/assets/projects/shadowdark-sheet.webp', 'docs/assets/projects/torchlight-timer.webp',
   'docs/assets/projects/dungeon-mapper.webp', 'docs/assets/projects/npc-voice.webp',
+  'docs/assets/projects/shadowdark-party.webp', 'docs/assets/projects/shadowdark-equipment.webp', 'docs/assets/projects/torchlight-spell.webp', 'docs/assets/projects/torchlight-board.webp', 'docs/assets/projects/npc-session.webp', 'docs/assets/projects/npc-transcript.webp',
 ]);
 const directories = new Set(['docs', 'docs/assets', 'docs/assets/projects']);
 const forbidden = /(?:^\.env(?:\.|$)|\.env$|^\.git(?:\.|$)|^\.omo$|\.(?:db|sqlite|sqlite3)(?:$|-)|\.(?:pem|key)$|PRIVATE)/i;
@@ -29,7 +30,9 @@ function inspect(root) {
         seen.add(label);
         // Also scan image bytes for literal source paths / metadata leaks. Visual
         // privacy and provenance still require a human review; this is not OCR.
-        if (/\/Users\/|github\.com/i.test(readFileSync(path, 'utf8'))) {
+        // The exact public GitHub profile is allowed; any repository path beneath it is not.
+        const text = readFileSync(path, 'utf8').replace(/https:\/\/github\.com\/jfabre(?![\w/.?#-])/g, '');
+        if (/\/Users\/|github\.com/i.test(text)) {
           reasons.push(`${label}: private source URL or path`);
         }
       } else {

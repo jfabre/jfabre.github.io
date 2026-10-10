@@ -2,6 +2,9 @@ import { readdirSync, readFileSync, lstatSync } from 'node:fs';
 import { resolve, relative, dirname, extname, sep } from 'node:path';
 
 const linkedIn = 'https://www.linkedin.com/in/jeremy-fabre-977b1b53/';
+// The public GitHub profile is allowed exactly; repository URLs beneath it still fail.
+const github = 'https://github.com/jfabre';
+const contacts = [linkedIn, github];
 // Publication origin. Allowed only as an exact self-reference in three places:
 // <link rel="canonical"> in HTML, <loc> in a root sitemap.xml, and the Sitemap: line
 // of a root robots.txt. Changing the host is a content edit in those three files.
@@ -12,9 +15,8 @@ const namespaces = { '.svg': 'http://www.w3.org/2000/svg', '.xml': 'http://www.s
 const ids = ['shadowdark-sheet', 'torchlight-timer', 'dungeon-mapper', 'npc-voice'];
 const required = [
   'Jeremy Fabre', 'Senior Software Developer', 'Delivering quality software on budget.',
-  'Selected projects',
   'A selection of personal projects built with AI-assisted development, from tabletop gaming tools to more ambitious applications that integrate AI directly.',
-  'View my projects', 'Connect on LinkedIn', linkedIn,
+  'Connect on LinkedIn', linkedIn,
   'For professional opportunities or to request my CV, connect with me on LinkedIn.',
 ];
 const textExtensions = new Set(['.html', '.js', '.mjs', '.css', '.svg', '.txt', '.xml', '.md']);
@@ -100,9 +102,9 @@ function check(root) {
 
   for (const { file, label, text } of texts) {
     const normalized = stripSelfReferences(label, decode(text));
-    if (/\/Users\/|[A-Z]:\\|github\.com/i.test(normalized)) reject(`${label}: private source URL or path`);
+    if (/\/Users\/|[A-Z]:\\|github\.com/i.test(normalized.replace(/https:\/\/github\.com\/jfabre(?![\w/.?#-])/g, ''))) reject(`${label}: private source URL or path`);
     for (const match of normalized.matchAll(/(?:[a-z][a-z\d+.-]*:\/\/|(?:mailto|tel|sms|javascript|data|ftp|file):|(?<!:)\/\/)[^\s<>"'`)}\]]+/gi)) {
-      if (match[0] !== linkedIn) reject(`${label}: disallowed URL`);
+      if (!contacts.includes(match[0])) reject(`${label}: disallowed URL`);
     }
     // A small static markup tokenizer, not a browser or JS evaluator.
     const stack = [];
@@ -138,7 +140,7 @@ function check(root) {
         if (['href', 'xlink:href', 'action', 'formaction'].includes(name)) {
           const compact = value.replace(/[\x00-\x20]/g, '');
           if (/^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(compact)) {
-            if (value !== linkedIn || tag !== 'a') reject(`${label}: disallowed URL in ${name}`);
+            if (!contacts.includes(value) || tag !== 'a') reject(`${label}: disallowed URL in ${name}`);
           } else if (!value.startsWith('#')) asset(value, file, label);
         }
       }

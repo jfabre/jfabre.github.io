@@ -10,6 +10,17 @@ Production notes (task 11, 2026-09-30):
 - Canonical URL `https://jfabre.github.io/` lives in `site/index.html`, `site/sitemap.xml` and `site/robots.txt` only. Changing the host is a content edit in those three files; no runtime code depends on it.
 - The CV remark in the user's choice did not add scope: no timeline, dates, employers, or downloadable CV. CV requests stay on the approved LinkedIn sentence.
 
+Production notes (feature galleries, 2026-09-30):
+
+- User-approved removals: the "Selected projects" heading and the "View my projects" button are gone; the opener carries LinkedIn and GitHub (`https://github.com/jfabre`, exact profile only) as icon + text social links, repeated in the footer.
+- Each project image is a native scroll-snap carousel (`[data-carousel]`, `site/carousel.js`). Slide counts: Dark Spire 3, Darklight 3, Dungeon Mapper 1 (unchanged image and markup), NPC Voice 3.
+- Feature slides are a `div.slide` holding a full-image `a.frame-link` plus a `.slide-caption`: serif `.slide-title` (h4, 1.1875rem), sans `.slide-text` (0.9375rem), muted `.slide-source` provenance line (0.8125rem). The caption is text, never part of the link. Slides stretch to the tallest caption so each step is exactly one track width; captioned tracks drop the track shadow.
+- Controls: prev/next buttons plus a `n / N` counter, always rendered. Buttons ship `disabled` in markup and are enabled by script, so no-JS readers never see live-looking dead buttons; content stays reachable by native horizontal scroll. No autoplay, no wrap; arrows disable at the ends; Mapper stays 1 / 1 with both disabled.
+- Script contract: index is the slide nearest `scrollLeft` (by slide offset, clamped; a zero-width hidden track keeps its last index); rapid clicks accumulate on the pending target; `scrollend` hands control back to the real position after a drag; a `ResizeObserver` re-snaps to the current slide instantly; `focusin` scrolls a keyboard-focused slide into view. Reduced motion inherits the global `scroll-behavior: auto`.
+- Focus: the track clips overflow, so a focused slide link draws its ring inside the `.frame` (inset by the ring width) rather than on the link.
+- Dark captures (Dark Spire, Darklight) sit in `.frame.is-dark`; portrait Darklight images are contained at native aspect, never cropped to fill 4:3.
+- Image provenance and captions are recorded in `.omo/drafts/portfolio-gallery-image-assessment.md` (private).
+
 ---
 
 Original comparison preamble follows.

@@ -23,16 +23,15 @@
       <h1 class="name">Jeremy Fabre</h1>
       <p class="role">Senior Software Developer</p>
       <p class="deck">Delivering quality software on budget.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="#projects">View my projects</a>
-        <a class="btn btn-secondary" href="https://www.linkedin.com/in/jeremy-fabre-977b1b53/" rel="me noopener noreferrer" target="_blank">Connect on LinkedIn</a>
-      </div>
+      <ul class="social">
+        <li><a class="social-link" href="https://www.linkedin.com/in/jeremy-fabre-977b1b53/" rel="me noopener noreferrer" target="_blank"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>Connect on LinkedIn</span></a></li>
+        <li><a class="social-link" href="https://github.com/jfabre" rel="me noopener noreferrer" target="_blank"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.21.7.82.57A12 12 0 0 0 12 .3"/></svg><span>GitHub</span></a></li>
+      </ul>
     </header>
 
-    <section class="projects" id="projects" aria-labelledby="projects-heading">
+    <section class="projects" id="projects" aria-labelledby="projects-intro">
       <div class="section-head">
-        <h2 class="section-heading" id="projects-heading">Selected projects</h2>
-        <p class="intro">A selection of personal projects built with AI-assisted development, from tabletop gaming tools to more ambitious applications that integrate AI directly.</p>
+        <p class="intro" id="projects-intro">A selection of personal projects built with AI-assisted development, from tabletop gaming tools to more ambitious applications that integrate AI directly.</p>
       </div>
 
       <ol class="rows">
@@ -41,13 +40,46 @@
           <div class="row-text">
             <h3 class="title" id="project-shadowdark-sheet-title">The Dark Spire — TaleSpire Character Sheet</h3>
             <p class="summary">A digital Shadowdark character sheet for TaleSpire and standalone browsers, bringing character stats, inventory, spells, and dice-roll integration together.</p>
-            <p class="meta"><span class="stack">HTML · CSS · JavaScript</span><span class="ai-note">Built with AI-assisted development.</span></p>
+            <p class="meta"><span class="stack">HTML · CSS · JavaScript</span></p>
           </div>
-          <figure class="figure">
-            <a class="frame-link" href="assets/projects/shadowdark-sheet.webp" aria-labelledby="project-shadowdark-sheet-title project-shadowdark-sheet-caption">
-              <span class="frame"><img src="assets/projects/shadowdark-sheet.webp" alt="The Dark Spire character sheet showing stats, inventory and spells for a Shadowdark character" width="620" height="860" decoding="async"></span>
-            </a>
-            <figcaption class="frame-caption"><a class="text-link" id="project-shadowdark-sheet-caption" href="assets/projects/shadowdark-sheet.webp">View full image</a></figcaption>
+          <figure class="figure carousel" data-carousel>
+            <div class="carousel-track" role="region" aria-roledescription="carousel" aria-label="The Dark Spire screenshots" tabindex="0">
+              <div class="slide">
+                <a class="frame-link" href="assets/projects/shadowdark-sheet.webp" aria-label="View full image: Character sheet with combat stats, a longsword attack, and expanded advantage and disadvantage controls.">
+                  <span class="frame is-dark"><img src="assets/projects/shadowdark-sheet.webp" alt="Character sheet with combat stats, a longsword attack, and expanded advantage and disadvantage controls." width="968" height="1208" decoding="async"></span>
+                </a>
+                <div class="slide-caption">
+                  <h4 class="slide-title">Rolls without the bookkeeping</h4>
+                  <p class="slide-text">Character stats feed directly into checks, attacks, and spell rolls, with advantage and disadvantage beside each action. The TaleSpire integration matches returned dice to the initiating roll, even when results arrive out of order; standalone use provides a local fallback.</p>
+                  <p class="slide-source">Standalone browser · fictional character.</p>
+                </div>
+              </div>
+              <div class="slide">
+                <a class="frame-link" href="assets/projects/shadowdark-party.webp" aria-label="View full image: Party panel with three fictional characters at healthy, wounded, and critical health levels.">
+                  <span class="frame is-dark"><img src="assets/projects/shadowdark-party.webp" alt="Party panel with three fictional characters at healthy, wounded, and critical health levels." width="968" height="432" loading="lazy" decoding="async"></span>
+                </a>
+                <div class="slide-caption">
+                  <h4 class="slide-title">Your party at a glance</h4>
+                  <p class="slide-text">See connected characters’ names, portraits, and health without leaving your sheet. Behind the panel, synchronization reconciles overlapping connections, rejects stale updates from recently retired sessions, and checks portrait transfers before replacing the displayed image.</p>
+                  <p class="slide-source">Simulated TaleSpire session · fictional party.</p>
+                </div>
+              </div>
+              <div class="slide">
+                <a class="frame-link" href="assets/projects/shadowdark-equipment.webp" aria-label="View full image: Populated inventory with armor, shield, coins, adventuring equipment, and a carrying-capacity breakdown.">
+                  <span class="frame is-dark"><img src="assets/projects/shadowdark-equipment.webp" alt="Populated inventory with armor, shield, coins, adventuring equipment, and a carrying-capacity breakdown." width="968" height="1050" loading="lazy" decoding="async"></span>
+                </a>
+                <div class="slide-caption">
+                  <h4 class="slide-title">Equipment choices, calculated together</h4>
+                  <p class="slide-text">Armor, shields, coins, and inventory contribute to a live carrying-capacity total, while equipment also feeds combat calculations. Shared character state keeps those rules connected, with bonus capacity available for custom features and house rules.</p>
+                  <p class="slide-source">Standalone browser · fictional character.</p>
+                </div>
+              </div>
+            </div>
+            <figcaption class="carousel-controls">
+              <button class="carousel-btn" type="button" disabled data-dir="-1" aria-label="Previous screenshot">&#8592;</button>
+              <span class="carousel-count" aria-live="polite">1 / 3</span>
+              <button class="carousel-btn" type="button" disabled data-dir="1" aria-label="Next screenshot">&#8594;</button>
+            </figcaption>
           </figure>
         </li>
 
@@ -56,13 +88,46 @@
           <div class="row-text">
             <h3 class="title" id="project-torchlight-timer-title">Darklight — Torchlight Timer</h3>
             <p class="summary">An atmospheric countdown timer for torches and light spells in TaleSpire, with animated visuals, playback controls, and duration adjustments.</p>
-            <p class="meta"><span class="stack">HTML · CSS · JavaScript</span><span class="ai-note">Built with AI-assisted development.</span></p>
+            <p class="meta"><span class="stack">HTML · CSS · JavaScript</span></p>
           </div>
-          <figure class="figure">
-            <a class="frame-link" href="assets/projects/torchlight-timer.webp" aria-labelledby="project-torchlight-timer-title project-torchlight-timer-caption">
-              <span class="frame"><img src="assets/projects/torchlight-timer.webp" alt="Darklight torchlight timer with an animated flame, remaining time and playback controls" width="540" height="900" loading="lazy" decoding="async"></span>
-            </a>
-            <figcaption class="frame-caption"><a class="text-link" id="project-torchlight-timer-caption" href="assets/projects/torchlight-timer.webp">View full image</a></figcaption>
+          <figure class="figure carousel" data-carousel>
+            <div class="carousel-track" role="region" aria-roledescription="carousel" aria-label="Darklight screenshots" tabindex="0">
+              <div class="slide">
+                <a class="frame-link" href="assets/projects/torchlight-timer.webp" aria-label="View full image: Darklight torch with a glowing flame and 41:58 remaining.">
+                  <span class="frame is-dark"><img src="assets/projects/torchlight-timer.webp" alt="Darklight torch with a glowing flame and 41:58 remaining." width="540" height="900" loading="lazy" decoding="async"></span>
+                </a>
+                <div class="slide-caption">
+                  <h4 class="slide-title">A flame driven by remaining time</h4>
+                  <p class="slide-text">A torch’s flame and glow respond to how much light remains. The countdown uses elapsed clock time rather than counting timer callbacks, keeping the visual effect and timer tied to the same state.</p>
+                  <p class="slide-source">Published application screenshot.</p>
+                </div>
+              </div>
+              <div class="slide">
+                <a class="frame-link" href="assets/projects/torchlight-spell.webp" aria-label="View full image: Darklight light spell with a luminous circular sun-rift and 27:26 remaining.">
+                  <span class="frame is-dark"><img src="assets/projects/torchlight-spell.webp" alt="Darklight light spell with a luminous circular sun-rift and 27:26 remaining." width="540" height="900" loading="lazy" decoding="async"></span>
+                </a>
+                <div class="slide-caption">
+                  <h4 class="slide-title">A different kind of light</h4>
+                  <p class="slide-text">Light spells share the countdown model but use an animated sun-rift instead of a flame. Its size and motion respond to remaining time, while canvas quality adapts to the embedded webview.</p>
+                  <p class="slide-source">Published application screenshot.</p>
+                </div>
+              </div>
+              <div class="slide">
+                <a class="frame-link" href="assets/projects/torchlight-board.webp" aria-label="View full image: Light board showing Wren’s torch at 4:18, Iskra’s spell at 58:41, and two players without lights.">
+                  <span class="frame is-dark"><img src="assets/projects/torchlight-board.webp" alt="Light board showing Wren’s torch at 4:18, Iskra’s spell at 58:41, and two players without lights." width="540" height="900" loading="lazy" decoding="async"></span>
+                </a>
+                <div class="slide-caption">
+                  <h4 class="slide-title">Which light goes out next?</h4>
+                  <p class="slide-text">The GM’s light board gathers torches and spells into one view, ordered by which will expire first. It also distinguishes players without a light, making the party’s remaining illumination easier to track during play.</p>
+                  <p class="slide-source">Published demo screenshot · fictional party.</p>
+                </div>
+              </div>
+            </div>
+            <figcaption class="carousel-controls">
+              <button class="carousel-btn" type="button" disabled data-dir="-1" aria-label="Previous screenshot">&#8592;</button>
+              <span class="carousel-count" aria-live="polite">1 / 3</span>
+              <button class="carousel-btn" type="button" disabled data-dir="1" aria-label="Next screenshot">&#8594;</button>
+            </figcaption>
           </figure>
         </li>
 
@@ -71,13 +136,19 @@
           <div class="row-text">
             <h3 class="title" id="project-dungeon-mapper-title">Dungeon Mapper</h3>
             <p class="summary">An agent-guided workflow for turning reviewed 2D dungeon descriptions into TaleSpire slabs, supported by deterministic validation, overlays, and export tools.</p>
-            <p class="meta"><span class="stack">Python</span><span class="ai-note">Built with AI-assisted development; AI assists the mapping workflow.</span></p>
+            <p class="meta"><span class="stack">Python</span></p>
           </div>
-          <figure class="figure">
-            <a class="frame-link" href="assets/projects/dungeon-mapper.webp" aria-labelledby="project-dungeon-mapper-title project-dungeon-mapper-caption">
-              <span class="frame"><img src="assets/projects/dungeon-mapper.webp" alt="Dungeon Mapper overlay of a 2D dungeon layout with rooms, corridors and validation markers" width="1600" height="993" loading="lazy" decoding="async"></span>
-            </a>
-            <figcaption class="frame-caption"><a class="text-link" id="project-dungeon-mapper-caption" href="assets/projects/dungeon-mapper.webp">View full image</a></figcaption>
+          <figure class="figure carousel" data-carousel>
+            <div class="carousel-track" role="region" aria-roledescription="carousel" aria-label="Dungeon Mapper screenshots" tabindex="0">
+              <a class="slide frame-link" href="assets/projects/dungeon-mapper.webp" aria-label="View full image: Dungeon Mapper overlay of a 2D dungeon layout with rooms, corridors and validation markers">
+                <span class="frame"><img src="assets/projects/dungeon-mapper.webp" alt="Dungeon Mapper overlay of a 2D dungeon layout with rooms, corridors and validation markers" width="1600" height="993" loading="lazy" decoding="async"></span>
+              </a>
+            </div>
+            <figcaption class="carousel-controls">
+              <button class="carousel-btn" type="button" disabled data-dir="-1" aria-label="Previous screenshot">&#8592;</button>
+              <span class="carousel-count" aria-live="polite">1 / 1</span>
+              <button class="carousel-btn" type="button" disabled data-dir="1" aria-label="Next screenshot">&#8594;</button>
+            </figcaption>
           </figure>
         </li>
 
@@ -86,13 +157,46 @@
           <div class="row-text">
             <h3 class="title" id="project-npc-voice-title">NPC Voice</h3>
             <p class="summary">A local prototype for AI-driven NPC conversations, with a web control panel and integrations for language generation, speech recognition, and voice synthesis. Discord voice integration is still in development.</p>
-            <p class="meta"><span class="stack">Elixir · Phoenix LiveView · JavaScript</span><span class="ai-note">Built with AI-assisted development; integrates AI dialogue and speech services.</span></p>
+            <p class="meta"><span class="stack">Elixir · Phoenix LiveView · JavaScript</span></p>
           </div>
-          <figure class="figure">
-            <a class="frame-link" href="assets/projects/npc-voice.webp" aria-labelledby="project-npc-voice-title project-npc-voice-caption">
-              <span class="frame"><img src="assets/projects/npc-voice.webp" alt="NPC Voice web control panel for AI-driven character conversations and speech settings" width="1280" height="760" loading="lazy" decoding="async"></span>
-            </a>
-            <figcaption class="frame-caption"><a class="text-link" id="project-npc-voice-caption" href="assets/projects/npc-voice.webp">View full image</a></figcaption>
+          <figure class="figure carousel" data-carousel>
+            <div class="carousel-track" role="region" aria-roledescription="carousel" aria-label="NPC Voice screenshots" tabindex="0">
+              <div class="slide">
+                <a class="frame-link" href="assets/projects/npc-voice.webp" aria-label="View full image: NPC edit form with a fictional persona, model selection, active-character indicator, and an unconfigured voice.">
+                  <span class="frame"><img src="assets/projects/npc-voice.webp" alt="NPC edit form with a fictional persona, model selection, active-character indicator, and an unconfigured voice." width="1440" height="750" loading="lazy" decoding="async"></span>
+                </a>
+                <div class="slide-caption">
+                  <h4 class="slide-title">Shape the character</h4>
+                  <p class="slide-text">Define an NPC’s persona and model, then choose who is active for the session. Voice design is a separate step: candidate previews can be auditioned before a voice is assigned, keeping character configuration and voice readiness distinct.</p>
+                  <p class="slide-source">Local prototype · fictional character; voice generation not run.</p>
+                </div>
+              </div>
+              <div class="slide">
+                <a class="frame-link" href="assets/projects/npc-session.webp" aria-label="View full image: NPC session workspace with scene context, active character, transcript area, and idle turn controls.">
+                  <span class="frame"><img src="assets/projects/npc-session.webp" alt="NPC session workspace with scene context, active character, transcript area, and idle turn controls." width="1440" height="900" loading="lazy" decoding="async"></span>
+                </a>
+                <div class="slide-caption">
+                  <h4 class="slide-title">Keep the scene in context</h4>
+                  <p class="slide-text">The session workspace brings character identity, scene context, and conversation history together. Replies use that context, while a shared turn-state model tracks progress. Character-specific sessions keep one NPC’s conversation from spilling into another’s.</p>
+                  <p class="slide-source">Local prototype · seeded example scene.</p>
+                </div>
+              </div>
+              <div class="slide">
+                <a class="frame-link" href="assets/projects/npc-transcript.webp" aria-label="View full image: Fictional player and NPC messages in the persistent transcript, with a copy control and no audio replay buttons.">
+                  <span class="frame"><img src="assets/projects/npc-transcript.webp" alt="Fictional player and NPC messages in the persistent transcript, with a copy control and no audio replay buttons." width="1192" height="816" loading="lazy" decoding="async"></span>
+                </a>
+                <div class="slide-caption">
+                  <h4 class="slide-title">A conversation you can revisit</h4>
+                  <p class="slide-text">Conversation messages stay ordered and readable, with replay offered when audio is attached. Text and speech are stored separately, so a speech-generation failure need not discard the reply. This example uses a seeded transcript rather than a live model response.</p>
+                  <p class="slide-source">Fixture transcript · no generated or played audio.</p>
+                </div>
+              </div>
+            </div>
+            <figcaption class="carousel-controls">
+              <button class="carousel-btn" type="button" disabled data-dir="-1" aria-label="Previous screenshot">&#8592;</button>
+              <span class="carousel-count" aria-live="polite">1 / 3</span>
+              <button class="carousel-btn" type="button" disabled data-dir="1" aria-label="Next screenshot">&#8594;</button>
+            </figcaption>
           </figure>
         </li>
       </ol>
@@ -101,8 +205,12 @@
 
   <footer class="contact" aria-label="Contact">
     <p class="contact-text">For professional opportunities or to request my CV, connect with me on LinkedIn.</p>
-    <a class="btn btn-primary" href="https://www.linkedin.com/in/jeremy-fabre-977b1b53/" rel="me noopener noreferrer" target="_blank">Connect on LinkedIn</a>
+    <ul class="social social-lg">
+        <li><a class="social-link" href="https://www.linkedin.com/in/jeremy-fabre-977b1b53/" rel="me noopener noreferrer" target="_blank"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>Connect on LinkedIn</span></a></li>
+        <li><a class="social-link" href="https://github.com/jfabre" rel="me noopener noreferrer" target="_blank"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.21.7.82.57A12 12 0 0 0 12 .3"/></svg><span>GitHub</span></a></li>
+      </ul>
   </footer>
 </div>
+<script src="carousel.js" defer></script>
 </body>
 </html>
