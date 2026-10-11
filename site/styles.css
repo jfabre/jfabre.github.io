@@ -162,19 +162,16 @@ p { max-width: var(--measure); }
   border-bottom: 1px solid var(--rule);
 }
 .name {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: clamp(2.75rem, 1.6rem + 6vw, 6rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 0.98;
-  letter-spacing: -0.02em;
-  font-variation-settings: "SOFT" 50, "WONK" 1;
-  overflow-wrap: anywhere;
+  letter-spacing: -0.03em;
 }
 .role {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-style: normal;
-  font-weight: 300;
-  font-variation-settings: "SOFT" 100;
+  font-weight: 500;
   font-size: clamp(1.5rem, 1.1rem + 2.4vw, 2.75rem);
   line-height: 1.1;
   margin-top: var(--space-2);
@@ -223,7 +220,7 @@ p { max-width: var(--measure); }
   border-bottom: 2px solid var(--ink);
 }
 .intro {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.625rem);
   line-height: 1.35;
   color: var(--ink);
@@ -264,6 +261,7 @@ p { max-width: var(--measure); }
   font-weight: 500;
   font-size: 1.5rem;
   line-height: 1.15;
+  overflow-wrap: normal;
   scroll-margin-top: 8rem;
 }
 .row .title::before { content: ""; display: block; width: 2.5rem; height: 3px; margin-bottom: var(--space-3); background: var(--row-accent); }
@@ -310,6 +308,13 @@ p { max-width: var(--measure); }
   .row.is-alt .ordinal { grid-column: 1; }
   .row.is-alt .row-text { grid-column: 3; }
   .row.is-alt > .figure { grid-column: 2; }
+  .row .title { font-size: 1.25rem; }
+}
+/* The longest title ("The Dark Spire — TaleSpire Character Sheet") is ~416px
+   at 1.25rem. Container em is the 17px body size, so 61em is ~1037px, where the
+   text column is ~425px wide (1280 viewport: container 1050px, column 432px) */
+@container (min-width: 61em) {
+  .row .title { white-space: nowrap; }
 }
 
 /* ---------- 9. Screenshot carousel: native scroll-snap strip, one shot per view ---------- */
