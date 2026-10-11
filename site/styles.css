@@ -454,11 +454,29 @@ p { max-width: var(--measure); }
 .not-found { min-height: 100vh; display: grid; align-content: center; padding-block: var(--space-10); }
 .not-found .role { margin-top: var(--space-3); }
 
-/* ---------- 12. Motion policy ---------- */
+/* ---------- 12. Motion: gated entrance, reduced-motion policy ---------- */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(1.5rem); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .opener > * { animation: rise 240ms var(--ease) both; }
+  .opener > :nth-child(2) { animation-delay: 40ms; }
+  .opener > :nth-child(3) { animation-delay: 80ms; }
+  .opener > :nth-child(4) { animation-delay: 120ms; }
+  .opener > :nth-child(5) { animation-delay: 160ms; }
+  .opener > :nth-child(6) { animation-delay: 200ms; }
+  @supports (animation-timeline: view()) {
+    .row {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    animation: none !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
