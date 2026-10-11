@@ -191,6 +191,14 @@ p { max-width: var(--measure); }
   gap: var(--space-3);
   margin-top: var(--space-6);
 }
+.kicker { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-5); font-size: 0.8125rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.kicker::before { content: ""; flex: none; width: 2rem; height: 1px; background: var(--ink); }
+.index { margin-top: var(--space-8); }
+.index-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--space-2) var(--space-5); margin: 0; padding: 0; list-style: none; }
+.index-link { display: flex; align-items: baseline; gap: var(--space-3); min-height: var(--target-min); padding-top: var(--space-3); border-top: 3px solid var(--row-accent); color: var(--ink); text-decoration: none; }
+.index-num { font-family: var(--font-serif); font-size: 1.25rem; font-variant-numeric: lining-nums tabular-nums; color: var(--row-accent); }
+.index-name { font-family: var(--font-serif); font-size: 1.125rem; line-height: 1.25; text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 1px; text-underline-offset: 0.2em; transition: text-decoration-color var(--dur) var(--ease); }
+.index-link:hover .index-name { text-decoration-color: var(--row-accent); }
 
 /* ---------- 7. Section rhythm ---------- */
 .projects { padding-block: var(--space-8) var(--space-6); }
@@ -258,6 +266,7 @@ p { max-width: var(--measure); }
   font-weight: 500;
   font-size: 1.5rem;
   line-height: 1.15;
+  scroll-margin-top: 8rem;
 }
 .row .title::before { content: ""; display: block; width: 2.5rem; height: 3px; margin-bottom: var(--space-3); background: var(--row-accent); }
 .row .summary { margin-top: var(--space-3); color: var(--muted); }
