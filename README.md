@@ -46,7 +46,7 @@ Do not bind `0.0.0.0`.
 ## Executable checks
 
 ```sh
-node --test scripts/check-static.test.mjs scripts/check-release.test.mjs scripts/check-gallery.test.mjs
+node --test scripts/check-static.test.mjs scripts/check-release.test.mjs scripts/check-gallery.test.mjs scripts/check-design.test.mjs
 node scripts/check-static.mjs site
 node scripts/check-static.mjs demo
 ```
@@ -75,9 +75,14 @@ Only the exact approved LinkedIn and GitHub profile URLs are allowed externally.
 `scripts/check-gallery.test.mjs` pins the site galleries: 3/3/1/3 slides, a caption on
 every feature slide, unique local images, and the unchanged Dungeon Mapper image.
 
+`scripts/check-design.test.mjs` pins the vendored Fraunces font (bytes, preload,
+licence location), the grain asset, the accent-token contrast floors, and the motion
+gating (reveal styles only inside reduced-motion and scroll-timeline guards).
+
 This is a static contract check, not a full HTML parser, image decoder, browser
 test, or complete security audit. Later work still requires rendered-page QA and
-asset provenance/privacy review. No build step, dependency manifest or bundler exists.
+asset provenance/privacy review. Rendered QA uses headless system Chromium.
+No build step, dependency manifest or bundler exists.
 
 ## Privacy boundary
 
