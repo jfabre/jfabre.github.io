@@ -73,7 +73,8 @@ unique; computed JS templates are not evaluated. Symbolic links, private files,
 base overrides, external assets and nonapproved contact URLs fail closed.
 Only the exact approved LinkedIn and GitHub profile URLs are allowed externally.
 `scripts/check-gallery.test.mjs` pins the site galleries: 3/3/1/3 slides, a caption on
-every feature slide, unique local images, and the unchanged Dungeon Mapper image.
+every feature slide, unique local media, the Darklight clip contract (muted loop, poster,
+no `autoplay` attribute), and the unchanged Dungeon Mapper image.
 
 `scripts/check-design.test.mjs` pins the vendored Fraunces font (bytes, preload,
 licence location), the grain asset, the accent-token contrast floors, and the motion

@@ -10,10 +10,11 @@ const project = fileURLToPath(new URL('../', import.meta.url));
 const checker = join(project, 'scripts/check-release.mjs');
 const temporaryRoot = tmpdir();
 const files = [
-  '.nojekyll', '404.html', 'favicon.svg', 'index.html', 'robots.txt', 'sitemap.xml', 'styles.css', 'carousel.js',
+  '.nojekyll', '404.html', 'favicon.svg', 'index.html', 'robots.txt', 'sitemap.xml', 'styles.css', 'carousel.js', 'media.js',
   'assets/projects/shadowdark-sheet.webp', 'assets/projects/torchlight-timer.webp',
   'assets/projects/dungeon-mapper.webp', 'assets/projects/npc-voice.webp',
   'assets/projects/shadowdark-party.webp', 'assets/projects/shadowdark-equipment.webp', 'assets/projects/torchlight-spell.webp', 'assets/projects/torchlight-board.webp', 'assets/projects/npc-session.webp', 'assets/projects/npc-transcript.webp',
+  'assets/projects/torchlight-timer.mp4', 'assets/projects/torchlight-spell.mp4', 'assets/projects/torchlight-board.mp4',
   'assets/fonts/fraunces-latin-full-normal.woff2', 'assets/fonts/newsreader-latin-opsz-normal.woff2', 'assets/texture/grain.svg',
 ];
 

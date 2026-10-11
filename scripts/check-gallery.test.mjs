@@ -25,27 +25,42 @@ test('projects keep order and slide counts 3/3/1/3', () => {
   }
 });
 
-test('nine feature slides each carry heading, description, provenance and alt text', () => {
+test('nine feature slides each carry heading, description, provenance and described media', () => {
   const featured = Object.entries(rows()).filter(([id]) => id !== 'dungeon-mapper').flatMap(([, b]) => slidesOf(b));
   assert.equal(featured.length, 9);
   for (const slide of featured) {
     assert.match(slide, /<h4 class="slide-title">[^<]+<\/h4>/);
     assert.match(slide, /<p class="slide-text">[^<]+<\/p>/);
     assert.match(slide, /<p class="slide-source">[^<]+<\/p>/);
-    assert.match(slide, /<img [^>]*alt="[^"]{10,}"[^>]*width="\d+" height="\d+"/);
+    const media = slide.match(/<(img|video) [^>]*>/);
+    assert.ok(media, 'slide media');
+    assert.match(media[0], /width="\d+" height="\d+"/);
+    assert.match(media[0], media[1] === 'img' ? / alt="[^"]{10,}"/ : / aria-label="[^"]{10,}"/);
   }
 });
 
-test('gallery images are unique existing local files', () => {
-  const sources = [...html.matchAll(/<img src="([^"]+)"/g)].map(([, s]) => s);
+test('gallery media are unique existing local files, each linked full size', () => {
+  const sources = [...html.matchAll(/<(?:img|video) src="([^"]+)"/g)].map(([, s]) => s);
   assert.equal(sources.length, 10);
   assert.equal(new Set(sources).size, 10);
   for (const src of sources) {
-    assert.match(src, /^assets\/projects\/[a-z-]+\.webp$/);
+    assert.match(src, /^assets\/projects\/[a-z-]+\.(?:webp|mp4)$/);
     assert.ok(existsSync(join(site, src)), src);
-    assert.ok(html.includes(`href="${src}"`), `full-image link ${src}`);
+    assert.ok(html.includes(`href="${src}"`), `full-size link ${src}`);
   }
   assert.doesNotMatch(html, /modcdn|mod\.io/i);
+});
+
+test('Darklight slides are short muted inline loops with a still poster and no autoplay attribute', () => {
+  const videos = [...rows()['torchlight-timer'].matchAll(/<video [^>]*>/g)].map(([v]) => v);
+  assert.equal(videos.length, 3);
+  for (const video of videos) {
+    for (const attr of [' muted', ' loop', ' playsinline', ' preload="none"']) assert.ok(video.includes(attr), `${attr} in ${video}`);
+    assert.doesNotMatch(video, / autoplay/);
+    const poster = video.match(/ poster="(assets\/projects\/[a-z-]+\.webp)"/);
+    assert.ok(poster && existsSync(join(site, poster[1])), video);
+  }
+  assert.match(html, /<script src="media\.js" defer><\/script>/);
 });
 
 test('Dungeon Mapper image and slide are unchanged', () => {

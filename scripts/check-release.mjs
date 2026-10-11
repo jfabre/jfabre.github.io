@@ -6,10 +6,11 @@ import { fileURLToPath } from 'node:url';
 // Deliberately closed: adding public files requires updating this reviewed list.
 const files = new Set([
   'README.md', 'docs/.nojekyll', 'docs/404.html', 'docs/favicon.svg', 'docs/index.html',
-  'docs/robots.txt', 'docs/sitemap.xml', 'docs/styles.css', 'docs/carousel.js',
+  'docs/robots.txt', 'docs/sitemap.xml', 'docs/styles.css', 'docs/carousel.js', 'docs/media.js',
   'docs/assets/projects/shadowdark-sheet.webp', 'docs/assets/projects/torchlight-timer.webp',
   'docs/assets/projects/dungeon-mapper.webp', 'docs/assets/projects/npc-voice.webp',
   'docs/assets/projects/shadowdark-party.webp', 'docs/assets/projects/shadowdark-equipment.webp', 'docs/assets/projects/torchlight-spell.webp', 'docs/assets/projects/torchlight-board.webp', 'docs/assets/projects/npc-session.webp', 'docs/assets/projects/npc-transcript.webp',
+  'docs/assets/projects/torchlight-timer.mp4', 'docs/assets/projects/torchlight-spell.mp4', 'docs/assets/projects/torchlight-board.mp4',
   'docs/assets/fonts/fraunces-latin-full-normal.woff2', 'docs/assets/fonts/newsreader-latin-opsz-normal.woff2', 'docs/assets/texture/grain.svg',
 ]);
 const directories = new Set(['docs', 'docs/assets', 'docs/assets/projects', 'docs/assets/fonts', 'docs/assets/texture']);
