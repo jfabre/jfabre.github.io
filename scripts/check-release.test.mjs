@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -7,18 +8,21 @@ import { test } from 'node:test';
 
 const project = fileURLToPath(new URL('../', import.meta.url));
 const checker = join(project, 'scripts/check-release.mjs');
-const temporaryRoot = '/var/folders/19/80jmtml94bs4ph996yqqbztm0000gn/T/opencode';
+const temporaryRoot = tmpdir();
 const files = [
   '.nojekyll', '404.html', 'favicon.svg', 'index.html', 'robots.txt', 'sitemap.xml', 'styles.css', 'carousel.js',
   'assets/projects/shadowdark-sheet.webp', 'assets/projects/torchlight-timer.webp',
   'assets/projects/dungeon-mapper.webp', 'assets/projects/npc-voice.webp',
   'assets/projects/shadowdark-party.webp', 'assets/projects/shadowdark-equipment.webp', 'assets/projects/torchlight-spell.webp', 'assets/projects/torchlight-board.webp', 'assets/projects/npc-session.webp', 'assets/projects/npc-transcript.webp',
+  'assets/fonts/fraunces-latin-full-normal.woff2', 'assets/texture/grain.svg',
 ];
 
 function fixture(t) {
   const root = mkdtempSync(join(temporaryRoot, 'release-preflight-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   mkdirSync(join(root, 'docs/assets/projects'), { recursive: true });
+  mkdirSync(join(root, 'docs/assets/fonts'), { recursive: true });
+  mkdirSync(join(root, 'docs/assets/texture'), { recursive: true });
   writeFileSync(join(root, 'README.md'), '# Jeremy Fabre\nPersonal projects.\nhttps://jfabre.github.io/\n');
   for (const file of files) copyFileSync(join(project, 'site', file), join(root, 'docs', file));
   return root;
