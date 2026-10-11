@@ -376,6 +376,15 @@ p { max-width: var(--measure); }
   font-size: 0.875rem;
   color: var(--muted);
 }
+.carousel-controls::before {
+  content: "";
+  flex: 1 1 auto;
+  align-self: center;
+  height: 3px;
+  background:
+    linear-gradient(var(--row-accent, var(--ink)), var(--row-accent, var(--ink))) 0 0 / calc(var(--progress, 0) * 100%) 100% no-repeat,
+    linear-gradient(var(--rule), var(--rule)) 0 50% / 100% 1px no-repeat;
+}
 .carousel-controls[hidden] { display: none; }
 .carousel-count { font-variant-numeric: tabular-nums; min-width: 3.5em; text-align: center; }
 .carousel-btn {

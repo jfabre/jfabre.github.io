@@ -25,6 +25,7 @@ for (const carousel of document.querySelectorAll('[data-carousel]')) {
     count.textContent = `${index + 1} / ${slides.length}`;
     prev.disabled = index === 0;
     next.disabled = index === last;
+    carousel.style.setProperty('--progress', ((index + 1) / slides.length).toFixed(4));
   };
   const sync = () => {
     const settled = nearest();
