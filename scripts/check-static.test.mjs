@@ -11,7 +11,6 @@ const ids = ['shadowdark-sheet', 'torchlight-timer', 'dungeon-mapper', 'npc-voic
 const copy = [
   'Jeremy Fabre',
   'Senior Software Developer',
-  'Delivering quality software on budget.',
   'A selection of personal projects built with AI-assisted development, from tabletop gaming tools to more ambitious applications that integrate AI directly.',
   'Connect on LinkedIn',
   linkedIn,
@@ -166,10 +165,10 @@ test('shared content exports the exact approved identity, section and contact', 
   assert.deepEqual(identity, {
     name: 'Jeremy Fabre', role: 'Senior Software Developer', tagline: 'Delivering quality software on budget.',
   });
-  assert.deepEqual(section, { heading: 'Selected projects', intro: copy[3] });
+  assert.deepEqual(section, { heading: 'Selected projects', intro: copy[2] });
   assert.deepEqual(contact, {
     ctaLabel: 'View my projects', ctaHref: '#projects', label: 'Connect on LinkedIn',
-    href: linkedIn, text: copy[6],
+    href: linkedIn, text: copy[5],
   });
 });
 

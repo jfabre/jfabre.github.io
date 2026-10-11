@@ -14,7 +14,7 @@ const sitemapUrl = `${publication}sitemap.xml`;
 const namespaces = { '.svg': 'http://www.w3.org/2000/svg', '.xml': 'http://www.sitemaps.org/schemas/sitemap/0.9' };
 const ids = ['shadowdark-sheet', 'torchlight-timer', 'dungeon-mapper', 'npc-voice'];
 const required = [
-  'Jeremy Fabre', 'Senior Software Developer', 'Delivering quality software on budget.',
+  'Jeremy Fabre', 'Senior Software Developer',
   'A selection of personal projects built with AI-assisted development, from tabletop gaming tools to more ambitious applications that integrate AI directly.',
   'Connect on LinkedIn', linkedIn,
   'For professional opportunities or to request my CV, connect with me on LinkedIn.',
