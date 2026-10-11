@@ -21,6 +21,16 @@ a { color: inherit; }
   font-display: swap;
 }
 
+/* ---------- 1c. Reading serif (Newsreader, OFL-1.1, vendored unmodified) ----------
+   Name, role and projects intro. Ordinary f, j and J; optical size follows font-size. */
+@font-face {
+  font-family: "Newsreader";
+  src: url("assets/fonts/newsreader-latin-opsz-normal.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---------- 2. Tokens ---------- */
 :root {
   --space-1: 0.25rem;
@@ -57,6 +67,7 @@ a { color: inherit; }
   --radius: 0;
 
   --font-serif: "Fraunces", ui-serif, "New York", "Iowan Old Style", Charter, Georgia, "Times New Roman", serif;
+  --font-reading: "Newsreader", ui-serif, "Iowan Old Style", Charter, Georgia, "Times New Roman", serif;
   --font-sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
 
   --focus-ring-color: var(--accent);
@@ -162,16 +173,16 @@ p { max-width: var(--measure); }
   border-bottom: 1px solid var(--rule);
 }
 .name {
-  font-family: var(--font-sans);
+  font-family: var(--font-reading);
   font-size: clamp(2.75rem, 1.6rem + 6vw, 6rem);
   font-weight: 600;
   line-height: 0.98;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 .role {
-  font-family: var(--font-sans);
+  font-family: var(--font-reading);
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: clamp(1.5rem, 1.1rem + 2.4vw, 2.75rem);
   line-height: 1.1;
   margin-top: var(--space-2);
@@ -220,7 +231,7 @@ p { max-width: var(--measure); }
   border-bottom: 2px solid var(--ink);
 }
 .intro {
-  font-family: var(--font-sans);
+  font-family: var(--font-reading);
   font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.625rem);
   line-height: 1.35;
   color: var(--ink);
