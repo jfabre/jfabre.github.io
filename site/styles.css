@@ -45,10 +45,15 @@ a { color: inherit; }
   --paper: #fbf7f0;
   --ink: #1b1a1f;
   --muted: #5e5a54;
-  --ordinal: #8b857c;
   --rule: #cfc6b8;
   --accent: #1d4ed8;
   --on-ink: #f6f0e6;
+  --spire: #7a5c12;     /* The Dark Spire: antique gold, 5.50:1 on --bg */
+  --ember: #a8470a;     /* Darklight: torch ember, 5.19:1 */
+  --mapper: #2f6b4c;    /* Dungeon Mapper: map green, 5.57:1 */
+  --npc: #6b3fa0;       /* NPC Voice: violet, 6.51:1 */
+  --ring-on-ink: #9db7ff; /* focus and hover on ink, 8.77:1 */
+  --offset: 0.625rem;   /* hard offset block behind screenshots */
   --radius: 0;
 
   --font-serif: "Fraunces", ui-serif, "New York", "Iowan Old Style", Charter, Georgia, "Times New Roman", serif;
@@ -219,6 +224,13 @@ p { max-width: var(--measure); }
   max-width: 34em;
 }
 
+/* ---------- 8b. Project accents ---------- */
+.row, .index-link { --row-accent: var(--accent); }
+[data-project="shadowdark-sheet"], .index-link[href="#project-shadowdark-sheet-title"] { --row-accent: var(--spire); }
+[data-project="torchlight-timer"], .index-link[href="#project-torchlight-timer-title"] { --row-accent: var(--ember); }
+[data-project="dungeon-mapper"], .index-link[href="#project-dungeon-mapper-title"] { --row-accent: var(--mapper); }
+[data-project="npc-voice"], .index-link[href="#project-npc-voice-title"] { --row-accent: var(--npc); }
+
 /* ---------- 8. Numbered magazine rows, alternating on desktop ---------- */
 .rows {
   display: grid;
@@ -237,18 +249,17 @@ p { max-width: var(--measure); }
   font-family: var(--font-serif);
   font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);   /* large text: 3.23:1 is acceptable */
   line-height: 0.9;
-  color: var(--ordinal);
+  color: var(--row-accent, var(--accent));
   font-variation-settings: "SOFT" 50, "WONK" 1;
   padding-right: var(--space-4);
-  transition: color var(--dur) var(--ease);
 }
-.row:hover .ordinal { color: var(--accent); }
 .row .title {
   font-family: var(--font-serif);
   font-weight: 500;
   font-size: 1.5rem;
   line-height: 1.15;
 }
+.row .title::before { content: ""; display: block; width: 2.5rem; height: 3px; margin-bottom: var(--space-3); background: var(--row-accent); }
 .row .summary { margin-top: var(--space-3); color: var(--muted); }
 .row .meta {
   margin-top: var(--space-3);
@@ -258,7 +269,7 @@ p { max-width: var(--measure); }
   color: var(--muted);
 }
 .row .meta .stack {
-  color: var(--ink);
+  color: var(--row-accent);
   font-size: 0.8125rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -303,7 +314,6 @@ p { max-width: var(--measure); }
   scroll-behavior: smooth;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
-  box-shadow: 0 1px 0 var(--rule), 0 18px 40px -24px rgb(27 26 31 / 0.45);
 }
 .carousel-track::-webkit-scrollbar { display: none; }
 .slide {
@@ -336,8 +346,10 @@ p { max-width: var(--measure); }
 .slide:hover img { transform: scale(1.02); }
 /* Captioned slides: link and caption travel together; the caption is plain text, not a link.
    Slides stretch to the tallest caption so the horizontal step stays one track width. */
-.carousel-track:has(.slide-caption) { box-shadow: none; }
-.frame-link { display: block; color: inherit; text-decoration: none; }
+.frame-link { position: relative; display: block; padding: 0 var(--offset) var(--offset) 0; color: inherit; text-decoration: none; }
+.frame-link::before { content: ""; position: absolute; inset: var(--offset) 0 0 var(--offset); background: var(--row-accent, var(--ink)); }
+.frame-link .frame { transition: transform var(--dur) var(--ease); }
+.frame-link:hover .frame { transform: translate(calc(var(--offset) * -0.3), calc(var(--offset) * -0.3)); }
 /* The track clips overflow and the positioned frame would cover an inset outline on the link,
    so the ring is drawn inside the frame itself */
 .carousel-track .frame-link:focus-visible { outline: none; }
@@ -345,6 +357,7 @@ p { max-width: var(--measure); }
   outline: var(--focus-ring-width) solid var(--focus-ring-color);
   outline-offset: calc(-1 * var(--focus-ring-width));
 }
+.carousel-track .frame-link:focus-visible .frame.is-dark { outline-color: var(--ring-on-ink); }
 .slide-caption { padding-top: var(--space-4); }
 .slide-title {
   margin: 0;
@@ -377,7 +390,7 @@ p { max-width: var(--measure); }
   cursor: pointer;
   transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
 }
-.carousel-btn:hover:not(:disabled) { border-color: var(--ink); color: var(--accent); }
+.carousel-btn:hover:not(:disabled) { border-color: var(--row-accent, var(--ink)); color: var(--row-accent, var(--accent)); }
 .carousel-btn:disabled { opacity: 0.4; cursor: default; }
 
 /* Social links: icon + quiet text, no button chrome */
@@ -434,5 +447,5 @@ p { max-width: var(--measure); }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .btn:active { transform: none; }
+  .btn:active, .frame-link:hover .frame, .slide:hover img { transform: none; }
 }
