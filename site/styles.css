@@ -93,7 +93,7 @@ a { color: inherit; }
 
 /* ---------- 4. Page canvas ---------- */
 body {
-  background: var(--bg);
+  background: var(--bg) url("assets/texture/grain.svg") 0 0 / 200px 200px repeat;
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: 1.0625rem;
@@ -457,4 +457,19 @@ p { max-width: var(--measure); }
     scroll-behavior: auto !important;
   }
   .btn:active, .frame-link:hover .frame, .slide:hover img { transform: none; }
+}
+
+/* ---------- 13. Print and forced colours ---------- */
+@media print {
+  body { background: #fff; }
+  .contact { background: none; color: var(--ink); }
+  .contact .social-link { color: var(--ink); }
+  .frame-link::before, .carousel-controls::before, .carousel-btn { display: none; }
+  .frame-link { padding: 0; }
+  *, *::before, *::after { animation: none !important; }
+}
+@media (forced-colors: active) {
+  body { background-image: none; }
+  .frame-link::before, .carousel-controls::before, .row .title::before { display: none; }
+  .frame-link { padding: 0; }
 }
