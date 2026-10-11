@@ -4,7 +4,7 @@ Status: **B, Light editorial, is the selected direction** (user choice recorded 
 
 Production notes (task 11, 2026-09-30):
 
-- `site/styles.css` is §1 foundations plus §3 merged into one unscoped stylesheet: the `[data-variant="b"]` scope and `--b-` prefixes are dropped (`--bg`, `--ink`, `--accent`, …), the demo switcher and showcase chrome (§1.4, §7) do not exist, and the placeholder frame stripes are removed because real captures ship. Values are otherwise identical to §3.
+- `site/styles.css` is §1 foundations plus §3 merged into one unscoped stylesheet: the `[data-variant="b"]` scope and `--b-` prefixes are dropped (`--bg`, `--ink`, `--accent`, …), the demo switcher and showcase chrome (§1.4, §7) do not exist, and the placeholder frame stripes are removed because real captures ship. Values are otherwise identical to §3. The tokens now include the accent set (`--spire`, `--ember`, `--mapper`, `--npc`, `--accent`, `--ring-on-ink`).
 - Layout tiers are container queries on `.rows`: single column, two columns at 38em (ordinal + text / image), three columns with alternation at 52em (`.is-alt` swaps text and image columns).
 - Added primitives: `.skip-link` (ink on off-white, revealed on `:focus-visible`), `.not-found` for `404.html` reusing `.ordinal`, `.name`, `.role`, `.deck`, `.btn`.
 - Canonical URL `https://jfabre.github.io/` lives in `site/index.html`, `site/sitemap.xml` and `site/robots.txt` only. Changing the host is a content edit in those three files; no runtime code depends on it.
@@ -20,6 +20,30 @@ Production notes (feature galleries, 2026-09-30):
 - Focus: the track clips overflow, so a focused slide link draws its ring inside the `.frame` (inset by the ring width) rather than on the link.
 - Dark captures (Dark Spire, Darklight) sit in `.frame.is-dark`; portrait Darklight images are contained at native aspect, never cropped to fill 4:3.
 - Image provenance and captions are recorded in `.omo/drafts/portfolio-gallery-image-assessment.md` (private).
+
+Production notes (visual character, 2026-10-11):
+
+- Font: Fraunces variable, file `site/assets/fonts/fraunces-latin-full-normal.woff2` from `@fontsource-variable/fraunces` 5.3.0, unmodified, sha256 `7e744849028e2219e2aa1bc467dc4032980dc4487c9c3da3010081cd72d3b103`. Axes: opsz, wght, SOFT, WONK. Preload with `crossorigin` on `site/index.html` and `site/404.html`. `font-display: swap`. Licence OFL-1.1. Full text in `third-party/fraunces/OFL.txt` in the public repository. The served font carries the copyright notice and the OFL licence URL in its name table (IDs 0 and 14); it has no ID 13 text. Licence text never goes under `site/`, because the static checker rejects its URLs. `.role` is upright weight 300. That supersedes the old "no webfont" rule for `site/`.
+- Accent tokens, with roles: `--spire` (The Dark Spire, antique gold, `#7a5c12`), `--ember` (Darklight, torch ember, `#a8470a`), `--mapper` (Dungeon Mapper, map green, `#2f6b4c`), `--npc` (NPC Voice, violet, `#6b3fa0`), `--accent` (shared default for links, paper focus, and unmatched rows, `#1d4ed8`), `--ring-on-ink` (focus and hover on the ink band, `#9db7ff`). Computed ratios:
+
+  | Token | on `--bg` | on `--paper` |
+  | --- | --- | --- |
+  | `--spire` | 5.50 | 5.84 |
+  | `--ember` | 5.19 | 5.51 |
+  | `--mapper` | 5.57 | 5.91 |
+  | `--npc` | 6.51 | 6.91 |
+  | `--accent` | 5.91 | 6.28 |
+
+  `--ring-on-ink` is 8.77 on `--ink` and `--on-ink` is 15.26 on `--ink`. Rendered-background darkening from `task-7-contrast.json` is 0.03255, about 3.3%, with grain matrix offset `-0.089`. Accents are mapped only through `[data-project]` and `.index-link[href]` selectors. There are no extra markup hooks. Accents are never used on ink.
+- Offset block: `.frame-link` padding plus `::before`. Hover is transform-only. The dark-frame focus ring uses `--ring-on-ink`.
+- Carousel progress: `--progress` is set by `render()`; without JS only the hairline shows.
+- Grain: a tiled `body` background (`assets/texture/grain.svg`, 200px repeat). The shipped matrix offset is `-0.089`, chosen so mean alpha stays at least 0.015 and rendered darkening stays at most 3.5%. Removed in print and forced colours.
+- Opener: the kicker `Portfolio · Four selected projects` and the project index, linking to the existing title ids with `scroll-margin-top: 8rem`.
+- Contact band: the footer sits outside `.page` with an inner `.page`.
+- Motion addendum: time-based motion stays at most 240 ms. Scroll-linked motion is inside both the no-preference and `@supports` guards, and is exempt from the duration cap. Base styles are always visible. Reduced motion means no animations.
+- Print and forced colours: print paints the body white, drops the ink fill on `.contact`, hides the offset block, the progress bar, and the carousel buttons, clears `.frame-link` padding, and disables animations. Forced colours remove the grain image, hide the offset block, the progress bar, and the title accent rule, and clear `.frame-link` padding. Focus rings stay.
+- Known limitation: 404 styling only applies at top-level paths, because asset paths must be relative.
+- Static-checker text traps for any `site/` text file: no URLs, no `github.com`, no `xlink`, no `//` without a following space, and no scheme-like substrings such as `data:` or `file:`, which also catches words like "metadata:". The same scan also rejects `mailto:`, `tel:`, `sms:`, `javascript:`, and `ftp:`, including a word such as "profile:". Sanctioned exceptions already in the checker are the two profile links, the canonical link, sitemap and robots self-references, and the exact SVG namespace in `.svg` files.
 
 ---
 
