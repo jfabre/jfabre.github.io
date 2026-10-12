@@ -40,7 +40,9 @@ test('nine feature slides each carry heading, description, provenance and descri
 });
 
 test('gallery media are unique existing local files, each linked full size', () => {
-  const sources = [...html.matchAll(/<(?:img|video) src="([^"]+)"/g)].map(([, s]) => s);
+  const projects = html.indexOf('<section class="projects"');
+  assert.ok(projects > 0, 'projects section');
+  const sources = [...html.slice(projects).matchAll(/<(?:img|video) src="([^"]+)"/g)].map(([, s]) => s);
   assert.equal(sources.length, 10);
   assert.equal(new Set(sources).size, 10);
   for (const src of sources) {

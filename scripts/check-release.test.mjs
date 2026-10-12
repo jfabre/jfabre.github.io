@@ -16,6 +16,7 @@ const files = [
   'assets/projects/shadowdark-party.webp', 'assets/projects/shadowdark-equipment.webp', 'assets/projects/torchlight-spell.webp', 'assets/projects/torchlight-board.webp', 'assets/projects/npc-session.webp', 'assets/projects/npc-transcript.webp',
   'assets/projects/torchlight-timer.mp4', 'assets/projects/torchlight-spell.mp4', 'assets/projects/torchlight-board.mp4',
   'assets/fonts/fraunces-latin-full-normal.woff2', 'assets/fonts/newsreader-latin-opsz-normal.woff2', 'assets/texture/grain.svg', 'assets/texture/grain-dark.svg',
+  'assets/portrait/jeremy.webp', 'assets/portrait/jeremy-360.webp',
 ];
 
 function fixture(t) {
@@ -24,6 +25,7 @@ function fixture(t) {
   mkdirSync(join(root, 'docs/assets/projects'), { recursive: true });
   mkdirSync(join(root, 'docs/assets/fonts'), { recursive: true });
   mkdirSync(join(root, 'docs/assets/texture'), { recursive: true });
+  mkdirSync(join(root, 'docs/assets/portrait'), { recursive: true });
   writeFileSync(join(root, 'README.md'), '# Jeremy Fabre\nPersonal projects.\nhttps://jfabre.github.io/\n');
   for (const file of files) copyFileSync(join(project, 'site', file), join(root, 'docs', file));
   return root;

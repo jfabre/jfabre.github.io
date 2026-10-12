@@ -109,6 +109,7 @@ a { color: inherit; }
     --band: #0e0c0a;
     --on-band: #ece3d2;
     --band-edge: #433a30;
+    --portrait-offset: #574a3b;
     --grain: url("assets/texture/grain-dark.svg");
     color-scheme: dark;
   }
@@ -130,6 +131,7 @@ a { color: inherit; }
     --band: #0e0c0a;
     --on-band: #ece3d2;
     --band-edge: #433a30;
+    --portrait-offset: #574a3b;
     --grain: url("assets/texture/grain-dark.svg");
     color-scheme: dark;
   }
@@ -243,11 +245,76 @@ p { max-width: var(--measure); }
 :root:not([data-theme="dark"]) .theme-toggle .icon-sun { display: none; }
 @media (min-width: 48em) { .theme-toggle { top: var(--space-6); } }
 
-/* ---------- 6. Opener: oversized stacked headline ---------- */
+/* ---------- 6. Opener: oversized stacked headline beside a hung portrait ----------
+   Phone: the portrait hangs top-right and the name sits on its bottom edge; role,
+   deck and links run full width below. From 48em the portrait takes its own column
+   beside the whole text stack and the project index spans both columns. */
 .opener {
+  --portrait-width: clamp(7rem, 30vw, 12rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--portrait-width);
+  grid-template-areas:
+    "name   portrait"
+    "role   role"
+    "deck   deck"
+    "social social"
+    "index  index";
+  column-gap: var(--space-4);
   padding-block: var(--space-10) var(--space-8);
   border-bottom: 1px solid var(--rule);
   position: relative;
+}
+.opener .name { grid-area: name; align-self: end; }
+.opener .role { grid-area: role; }
+.opener .deck { grid-area: deck; }
+.opener .social { grid-area: social; }
+.opener .index { grid-area: index; }
+/* Same hanging as the project captures: a paper mat, a hairline edge and the hard
+   offset block, here in ink because the portrait belongs to no project (a muted
+   umber in dark, where cream ink would glow) */
+.portrait {
+  grid-area: portrait;
+  align-self: start;
+  margin-top: var(--space-4);
+  position: relative;
+  padding: 0 var(--offset) var(--offset) 0;
+}
+.portrait::before {
+  content: "";
+  position: absolute;
+  inset: var(--offset) 0 0 var(--offset);
+  background: var(--portrait-offset, var(--ink));
+}
+.portrait img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  padding: var(--space-1);
+  background: var(--paper);
+  border: 1px solid var(--frame-line);
+}
+/* Two columns from 43em, where a one-line name would otherwise leave a void above it */
+@media (min-width: 43em) {
+  .opener {
+    --portrait-width: clamp(13rem, 22vw, 18rem);
+    grid-template-rows: auto auto auto auto 1fr auto;
+    grid-template-areas:
+      "name   portrait"
+      "role   portrait"
+      "deck   portrait"
+      "social portrait"
+      ".      portrait"
+      "index  index";
+    column-gap: var(--space-8);
+  }
+  .opener .name { align-self: start; margin-top: var(--space-4); }
+  .portrait img { padding: var(--space-2); }
+}
+/* From 48em the opener's taller top padding clears the theme switch on its own */
+@media (min-width: 48em) {
+  .opener .name, .portrait { margin-top: 0; }
 }
 /* Double hairline: the magazine masthead rule */
 .opener::after {
@@ -293,6 +360,8 @@ p { max-width: var(--measure); }
 .index-num { font-family: var(--font-serif); font-size: 1.25rem; font-variant-numeric: lining-nums tabular-nums; color: var(--row-accent); }
 .index-name { font-family: var(--font-serif); font-size: 1.125rem; line-height: 1.25; text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 1px; text-underline-offset: 0.2em; transition: text-decoration-color var(--dur) var(--ease); }
 .index-link:hover .index-name { text-decoration-color: var(--row-accent); }
+/* Four items never wrap 3 + 1: two by two until there is room for one row */
+@media (min-width: 37.5em) and (max-width: 63.99em) { .index-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ---------- 7. Section rhythm ---------- */
 .projects { padding-block: 0 var(--space-6); }
@@ -624,6 +693,7 @@ html:has(.lightbox[open]) { overflow: hidden; }
   .opener > :nth-child(4) { animation-delay: 120ms; }
   .opener > :nth-child(5) { animation-delay: 160ms; }
   .opener > :nth-child(6) { animation-delay: 200ms; }
+  .opener > .portrait { animation-delay: 40ms; }
   @supports (animation-timeline: view()) {
     .row {
       animation: rise linear both;
@@ -650,12 +720,12 @@ html:has(.lightbox[open]) { overflow: hidden; }
   body { background: #fff; }
   .contact { background: none; color: var(--ink); }
   .contact .social-link { color: var(--ink); }
-  .frame-link::before, .carousel-controls::before, .carousel-btn, .theme-toggle { display: none; }
-  .frame-link { padding: 0; }
+  .frame-link::before, .portrait::before, .carousel-controls::before, .carousel-btn, .theme-toggle { display: none; }
+  .frame-link, .portrait { padding: 0; }
   *, *::before, *::after { animation: none !important; }
 }
 @media (forced-colors: active) {
   body { background-image: none; }
-  .frame-link::before, .carousel-controls::before, .row .title::before { display: none; }
-  .frame-link { padding: 0; }
+  .frame-link::before, .portrait::before, .carousel-controls::before, .row .title::before { display: none; }
+  .frame-link, .portrait { padding: 0; }
 }

@@ -12,8 +12,9 @@ const files = new Set([
   'docs/assets/projects/shadowdark-party.webp', 'docs/assets/projects/shadowdark-equipment.webp', 'docs/assets/projects/torchlight-spell.webp', 'docs/assets/projects/torchlight-board.webp', 'docs/assets/projects/npc-session.webp', 'docs/assets/projects/npc-transcript.webp',
   'docs/assets/projects/torchlight-timer.mp4', 'docs/assets/projects/torchlight-spell.mp4', 'docs/assets/projects/torchlight-board.mp4',
   'docs/assets/fonts/fraunces-latin-full-normal.woff2', 'docs/assets/fonts/newsreader-latin-opsz-normal.woff2', 'docs/assets/texture/grain.svg', 'docs/assets/texture/grain-dark.svg',
+  'docs/assets/portrait/jeremy.webp', 'docs/assets/portrait/jeremy-360.webp',
 ]);
-const directories = new Set(['docs', 'docs/assets', 'docs/assets/projects', 'docs/assets/fonts', 'docs/assets/texture']);
+const directories = new Set(['docs', 'docs/assets', 'docs/assets/projects', 'docs/assets/fonts', 'docs/assets/texture', 'docs/assets/portrait']);
 const forbidden = /(?:^\.env(?:\.|$)|\.env$|^\.git(?:\.|$)|^\.omo$|\.(?:db|sqlite|sqlite3)(?:$|-)|\.(?:pem|key)$|PRIVATE)/i;
 
 function inspect(root) {
