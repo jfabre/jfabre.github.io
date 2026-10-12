@@ -56,6 +56,7 @@ a { color: inherit; }
   --paper: #fbf7f0;
   --ink: #1b1a1f;
   --muted: #5e5a54;
+  --control-edge: #8b857c;  /* 3.23:1 on --bg: a control boundary, unlike decorative --rule */
   --rule: #cfc6b8;
   --accent: #1d4ed8;
   --on-ink: #f6f0e6;
@@ -109,6 +110,7 @@ a { color: inherit; }
     --band: #0e0c0a;
     --on-band: #ece3d2;
     --band-edge: #433a30;
+    --control-edge: #76695a;
     --portrait-offset: #574a3b;
     --grain: url("assets/texture/grain-dark.svg");
     color-scheme: dark;
@@ -131,6 +133,7 @@ a { color: inherit; }
     --band: #0e0c0a;
     --on-band: #ece3d2;
     --band-edge: #433a30;
+    --control-edge: #76695a;
     --portrait-offset: #574a3b;
     --grain: url("assets/texture/grain-dark.svg");
     color-scheme: dark;
@@ -230,7 +233,7 @@ p { max-width: var(--measure); }
   width: var(--target-min);
   height: var(--target-min);
   padding: 0;
-  border: 1px solid var(--rule);
+  border: 1px solid var(--control-edge);
   border-radius: var(--radius);
   background: transparent;
   color: var(--ink);
@@ -546,7 +549,7 @@ p { max-width: var(--measure); }
 .carousel-btn {
   min-width: var(--target-min);
   min-height: var(--target-min);
-  border: 1px solid var(--rule);
+  border: 1px solid var(--control-edge);
   border-radius: 0;
   background: transparent;
   color: var(--ink);

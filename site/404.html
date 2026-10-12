@@ -10,13 +10,15 @@
   <meta name="theme-color" content="#1a1612" media="(prefers-color-scheme: dark)">
   <script>
     // Theme: a saved choice wins, otherwise the system preference, followed live.
+    // Choosing the theme the system already asks for clears the saved choice, so the
+    // switch also leads back to following the system.
     // Runs before the stylesheet so the first paint already carries the theme.
     (() => {
       const root = document.documentElement;
       const system = matchMedia('(prefers-color-scheme: dark)');
       const colors = { light: '#f6f0e6', dark: '#1a1612' };
       const read = () => { try { return localStorage.getItem('theme'); } catch { return null; } };
-      const save = (theme) => { try { localStorage.setItem('theme', theme); return true; } catch { return false; } };
+      const save = (theme) => { try { if (theme) localStorage.setItem('theme', theme); else localStorage.removeItem('theme'); return true; } catch { return false; } };
       let choice = read();
       const apply = () => {
         const theme = choice === 'light' || choice === 'dark' ? choice : system.matches ? 'dark' : 'light';
@@ -37,7 +39,8 @@
       });
       document.addEventListener('click', (event) => {
         if (!(event.target instanceof Element) || !event.target.closest('.theme-toggle')) return;
-        choice = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        choice = next === (system.matches ? 'dark' : 'light') ? null : next;
         save(choice);
         apply();
       });
