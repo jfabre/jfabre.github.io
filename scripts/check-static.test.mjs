@@ -97,6 +97,13 @@ test('wrong LinkedIn URL is rejected', (t) => run(t,
   1, /required copy|disallowed URL/i));
 test('extra LinkedIn suffix is rejected even with canonical copy present', (t) => run(t,
   [fixture(t, (html) => html + `<a href="${linkedIn}?tracking=1">Contact</a>`)], 1, /disallowed URL/i));
+const projectLinks = ['https://talespire.com/', 'https://www.thearcanelibrary.com/pages/shadowdark',
+  'https://mod.io/g/talespire/m/the-dark-spire-character-sheet',
+  'https://mod.io/g/talespire/m/darklight-a-torghlight-timer-for-shadowdark'];
+test('approved project links are accepted as anchors', (t) => run(t,
+  [fixture(t, (html) => html + projectLinks.map((href) => `<a href="${href}">Link</a>`).join(''))], 0));
+test('other mod.io pages are rejected', (t) => run(t,
+  [fixture(t, (html) => html + '<a href="https://mod.io/g/talespire/m/torch">Link</a>')], 1, /disallowed URL/i));
 test('duplicate project ID is rejected', (t) => run(t,
   [fixture(t, (html) => html + card(ids[0]))], 1, /exactly once/i));
 test('out-of-order projects are rejected', (t) => run(t,

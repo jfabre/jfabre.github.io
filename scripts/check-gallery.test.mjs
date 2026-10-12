@@ -48,7 +48,8 @@ test('gallery media are unique existing local files, each linked full size', () 
     assert.ok(existsSync(join(site, src)), src);
     assert.ok(html.includes(`href="${src}"`), `full-size link ${src}`);
   }
-  assert.doesNotMatch(html, /modcdn|mod\.io/i);
+  // Media are never hotlinked from mod.io; plain links to the mod.io pages are fine.
+  assert.doesNotMatch(html, /modcdn|(?:src|srcset|poster)="[^"]*mod\.io/i);
 });
 
 test('Darklight slides are short muted inline loops with a still poster and no autoplay attribute', () => {

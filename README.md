@@ -71,7 +71,8 @@ markup assets resolve from that tree's root; CSS URLs resolve from the styleshee
 Quoted and unquoted attributes are supported. Keep project hooks literal and
 unique; computed JS templates are not evaluated. Symbolic links, private files,
 base overrides, external assets and nonapproved contact URLs fail closed.
-Only the exact approved LinkedIn and GitHub profile URLs are allowed externally.
+Only the exact approved LinkedIn and GitHub profile URLs, plus the TaleSpire, Shadowdark
+and two mod.io project links, are allowed externally.
 `scripts/check-gallery.test.mjs` pins the site galleries: 3/3/1/3 slides, a caption on
 every feature slide, unique local media, the Darklight clip contract (muted loop, poster,
 no `autoplay` attribute), and the unchanged Dungeon Mapper image.

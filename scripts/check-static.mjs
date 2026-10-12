@@ -4,7 +4,14 @@ import { resolve, relative, dirname, extname, sep } from 'node:path';
 const linkedIn = 'https://www.linkedin.com/in/jeremy-fabre-977b1b53/';
 // The public GitHub profile is allowed exactly; repository URLs beneath it still fail.
 const github = 'https://github.com/jfabre';
-const contacts = [linkedIn, github];
+// Exact outbound project links: the platforms the tools target and their mod.io pages.
+const projectLinks = [
+  'https://talespire.com/',
+  'https://www.thearcanelibrary.com/pages/shadowdark',
+  'https://mod.io/g/talespire/m/the-dark-spire-character-sheet',
+  'https://mod.io/g/talespire/m/darklight-a-torghlight-timer-for-shadowdark',
+];
+const contacts = [linkedIn, github, ...projectLinks];
 // Publication origin. Allowed only as an exact self-reference in three places:
 // <link rel="canonical"> in HTML, <loc> in a root sitemap.xml, and the Sitemap: line
 // of a root robots.txt. Changing the host is a content edit in those three files.

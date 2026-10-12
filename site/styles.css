@@ -352,6 +352,7 @@ p { max-width: var(--measure); }
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+.row .meta .text-link { justify-self: start; }
 
 /* Tablet tier: ordinal sits above the text, image takes the other column */
 @container (min-width: 38em) {
