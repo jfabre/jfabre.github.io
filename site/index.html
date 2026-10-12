@@ -96,7 +96,7 @@
                 </a>
                 <div class="slide-caption">
                   <h4 class="slide-title">Rolls without the bookkeeping</h4>
-                  <p class="slide-text">Character stats feed directly into checks, attacks, and spell rolls, with advantage and disadvantage beside each action. The TaleSpire integration matches returned dice to the initiating roll, even when results arrive out of order; standalone use provides a local fallback.</p>
+                  <p class="slide-text">Stats feed every check, attack, and spell roll, with advantage and disadvantage beside each action. In TaleSpire, each dice result finds its roll, even when results arrive out of order.</p>
                   <p class="slide-source">Standalone browser · fictional character; portrait from a public-domain painting.</p>
                 </div>
               </div>
@@ -106,7 +106,7 @@
                 </a>
                 <div class="slide-caption">
                   <h4 class="slide-title">Your party at a glance</h4>
-                  <p class="slide-text">See connected characters’ names, portraits, and health without leaving your sheet. Behind the panel, synchronization reconciles overlapping connections, rejects stale updates from recently retired sessions, and checks portrait transfers before replacing the displayed image.</p>
+                  <p class="slide-text">See your party’s names, portraits, and health without leaving your sheet. Behind the panel, sync survives reconnects, ignores stale updates, and checks each portrait before showing it.</p>
                   <p class="slide-source">Simulated TaleSpire session · fictional party; portraits from public-domain paintings.</p>
                 </div>
               </div>
@@ -116,7 +116,7 @@
                 </a>
                 <div class="slide-caption">
                   <h4 class="slide-title">Equipment choices, calculated together</h4>
-                  <p class="slide-text">Armor, shields, coins, and inventory contribute to a live carrying-capacity total, while equipment also feeds combat calculations. Shared character state keeps those rules connected, with bonus capacity available for custom features and house rules.</p>
+                  <p class="slide-text">Armor, shields, coins, and gear add up to a live carrying-capacity total, and the same equipment updates your combat stats. Bonus slots cover custom features and house rules.</p>
                   <p class="slide-source">Standalone browser · fictional character.</p>
                 </div>
               </div>
@@ -144,7 +144,7 @@
                 </a>
                 <div class="slide-caption">
                   <h4 class="slide-title">A flame driven by remaining time</h4>
-                  <p class="slide-text">A torch’s flame and glow respond to how much light remains. The countdown uses elapsed clock time rather than counting timer callbacks, keeping the visual effect and timer tied to the same state.</p>
+                  <p class="slide-text">The flame and glow follow how much light remains. The countdown runs on real elapsed time, so the animation and the timer never drift apart.</p>
                   <p class="slide-source">Recorded from the published application.</p>
                 </div>
               </div>
@@ -154,7 +154,7 @@
                 </a>
                 <div class="slide-caption">
                   <h4 class="slide-title">A different kind of light</h4>
-                  <p class="slide-text">Light spells share the countdown model but use an animated sun-rift instead of a flame. Its size and motion respond to remaining time, while canvas quality adapts to the embedded webview.</p>
+                  <p class="slide-text">Light spells use the same countdown with an animated sun-rift instead of a flame. Its size and motion follow the time left, and rendering adapts to TaleSpire’s built-in browser.</p>
                   <p class="slide-source">Recorded from the published application.</p>
                 </div>
               </div>
@@ -164,7 +164,7 @@
                 </a>
                 <div class="slide-caption">
                   <h4 class="slide-title">Which light goes out next?</h4>
-                  <p class="slide-text">The GM’s light board gathers torches and spells into one view, ordered by which will expire first. It also distinguishes players without a light, making the party’s remaining illumination easier to track during play.</p>
+                  <p class="slide-text">The GM’s light board lists every torch and spell, soonest to expire first, and flags players left without a light.</p>
                   <p class="slide-source">Recorded board view · fictional party.</p>
                 </div>
               </div>
@@ -202,7 +202,7 @@
           <p class="ordinal" aria-hidden="true">04</p>
           <div class="row-text">
             <h3 class="title" id="project-npc-voice-title">NPC Voice</h3>
-            <p class="summary">A local prototype for AI-driven NPC conversations, with a web control panel and integrations for language generation, speech recognition, and voice synthesis. Discord voice integration is still in development.</p>
+            <p class="summary">A local prototype for AI-driven NPC conversations: a web control panel wired to language generation, speech recognition, and voice synthesis. Discord voice is still in progress.</p>
             <p class="meta"><span class="stack">Elixir · Phoenix LiveView · JavaScript</span></p>
           </div>
           <figure class="figure carousel" data-carousel>
@@ -213,7 +213,7 @@
                 </a>
                 <div class="slide-caption">
                   <h4 class="slide-title">Shape the character</h4>
-                  <p class="slide-text">Define an NPC’s persona and model, then choose who is active for the session. Voice design is a separate step: candidate previews can be auditioned before a voice is assigned, keeping character configuration and voice readiness distinct.</p>
+                  <p class="slide-text">Set an NPC’s persona and model, then pick who is active this session. Voices are a separate step: audition previews before assigning one.</p>
                   <p class="slide-source">Local prototype · fictional character; voice generation not run.</p>
                 </div>
               </div>
@@ -223,7 +223,7 @@
                 </a>
                 <div class="slide-caption">
                   <h4 class="slide-title">Keep the scene in context</h4>
-                  <p class="slide-text">The session workspace brings character identity, scene context, and conversation history together. Replies use that context, while a shared turn-state model tracks progress. Character-specific sessions keep one NPC’s conversation from spilling into another’s.</p>
+                  <p class="slide-text">Character, scene, and conversation history share one workspace, and replies draw on all three. Each NPC keeps its own session, so conversations never bleed together.</p>
                   <p class="slide-source">Local prototype · seeded example scene.</p>
                 </div>
               </div>
@@ -233,7 +233,7 @@
                 </a>
                 <div class="slide-caption">
                   <h4 class="slide-title">A conversation you can revisit</h4>
-                  <p class="slide-text">Conversation messages stay ordered and readable, with replay offered when audio is attached. Text and speech are stored separately, so a speech-generation failure need not discard the reply. This example uses a seeded transcript rather than a live model response.</p>
+                  <p class="slide-text">Messages stay in order, with replay when audio is attached. Text and speech are stored separately, so a failed voice clip never loses the reply.</p>
                   <p class="slide-source">Fixture transcript · no generated or played audio.</p>
                 </div>
               </div>
