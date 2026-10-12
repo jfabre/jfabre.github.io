@@ -14,7 +14,6 @@ const copy = [
   'A selection of personal projects built with AI-assisted development, from tabletop gaming tools to more ambitious applications that integrate AI directly.',
   'Connect on LinkedIn',
   linkedIn,
-  'For professional opportunities or to request my CV, connect with me on LinkedIn.',
 ];
 const card = (id) => `<article data-project="${id}"><img src="assets/projects/${id}.webp" alt="Project"></article>`;
 const markup = () => `<!doctype html><html><body>${copy.map((text) => `<p>${text}</p>`).join('')}
@@ -175,7 +174,7 @@ test('shared content exports the exact approved identity, section and contact', 
   assert.deepEqual(section, { heading: 'Selected projects', intro: copy[2] });
   assert.deepEqual(contact, {
     ctaLabel: 'View my projects', ctaHref: '#projects', label: 'Connect on LinkedIn',
-    href: linkedIn, text: copy[5],
+    href: linkedIn, text: 'I’m happy to share my CV or walk through any of these projects in more detail.',
   });
 });
 

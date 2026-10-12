@@ -8,7 +8,7 @@ Production notes (task 11, 2026-09-30):
 - Layout tiers are container queries on `.rows`: single column, two columns at 38em (ordinal + text / image), three columns with alternation at 52em (`.is-alt` swaps text and image columns).
 - Added primitives: `.skip-link` (ink on off-white, revealed on `:focus-visible`), `.not-found` for `404.html` reusing `.ordinal`, `.name`, `.role`, `.deck`, `.btn`.
 - Canonical URL `https://jfabre.github.io/` lives in `site/index.html`, `site/sitemap.xml` and `site/robots.txt` only. Changing the host is a content edit in those three files; no runtime code depends on it.
-- The CV remark in the user's choice did not add scope: no timeline, dates, employers, or downloadable CV. CV requests stay on the approved LinkedIn sentence.
+- The CV remark in the user's choice did not add scope: no timeline, dates, employers, or downloadable CV. CV requests go through LinkedIn: the footer reads "Let’s talk." (`h2.contact-text`), with the footer LinkedIn link labelled "Message me on LinkedIn".
 
 Production notes (feature galleries, 2026-09-30):
 

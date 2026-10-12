@@ -24,7 +24,6 @@ const required = [
   'Jeremy Fabre', 'Senior Software Developer',
   'A selection of personal projects built with AI-assisted development, from tabletop gaming tools to more ambitious applications that integrate AI directly.',
   'Connect on LinkedIn', linkedIn,
-  'For professional opportunities or to request my CV, connect with me on LinkedIn.',
 ];
 const textExtensions = new Set(['.html', '.js', '.mjs', '.css', '.svg', '.txt', '.xml', '.md']);
 const forbidden = /(?:^\.env(?:\.|$)|\.env$|\.(?:db|sqlite|sqlite3)(?:$|-)|\.(?:pem|key)$|^\.omo$|PRIVATE)/i;

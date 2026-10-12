@@ -14,7 +14,7 @@ export const contact = {
   ctaHref: '#projects',
   label: 'Connect on LinkedIn',
   href: 'https://www.linkedin.com/in/jeremy-fabre-977b1b53/',
-  text: 'For professional opportunities or to request my CV, connect with me on LinkedIn.',
+  text: 'I’m happy to share my CV or walk through any of these projects in more detail.',
 };
 
 /* Stable markup hooks: data-project = id, data-title = title,

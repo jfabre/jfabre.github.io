@@ -621,6 +621,7 @@ html:has(.lightbox[open]) { overflow: hidden; }
 .contact .social-link:hover { color: var(--ring-on-ink); text-decoration-color: currentColor; }
 .contact-text {
   font-family: var(--font-serif);
+  font-weight: 400;
   font-size: clamp(1.375rem, 1.1rem + 1.4vw, 2rem);
   line-height: 1.25;
   letter-spacing: -0.01em;
