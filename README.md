@@ -78,7 +78,12 @@ no `autoplay` attribute), and the unchanged Dungeon Mapper image.
 
 `scripts/check-design.test.mjs` pins the vendored Fraunces font (bytes, preload,
 licence location), the grain asset, the accent-token contrast floors, and the motion
-gating (reveal styles only inside reduced-motion and scroll-timeline guards).
+gating (reveal styles only inside reduced-motion and scroll-timeline guards). It also
+pins the dark theme: the two dark token lists in `site/styles.css` §2b are identical
+and screen-only (print stays light), dark accents and muted text are at least 4.5:1 on
+the dark page and paper, the focus rings at least 3:1, and the inline theme script runs
+before the stylesheet on both pages with the switch shipped `hidden`. The theme follows
+the system until the switch saves a choice in `localStorage`; see DESIGN.md.
 
 This is a static contract check, not a full HTML parser, image decoder, browser
 test, or complete security audit. Later work still requires rendered-page QA and

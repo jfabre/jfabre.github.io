@@ -47,6 +47,29 @@ Production notes (visual character, 2026-10-11):
 - Known limitation: 404 styling only applies at top-level paths, because asset paths must be relative.
 - Static-checker text traps for any `site/` text file: no URLs, no `github.com`, no `xlink`, no `//` without a following space, and no scheme-like substrings such as `data:` or `file:`, which also catches words like "metadata:". The same scan also rejects `mailto:`, `tel:`, `sms:`, `javascript:`, and `ftp:`, including a word such as "profile:". Sanctioned exceptions already in the checker are the two profile links, the canonical link, sitemap and robots self-references, and the exact SVG namespace in `.svg` files.
 
+Production notes (dark theme, 2026-10-11):
+
+- The light theme is the original contract and is unchanged pixel for pixel; the only new light pixels are the 44px theme switch. The dark theme is the same magazine printed on dark stock: warm near-black paper, cream ink, lighter per-project inks, a light-speck grain.
+- Semantic dark-surface tokens replace `--ink` used as a fill. `--stage` / `--on-stage` (`#1b1a1f` / `#f6f0e6`, never themed) sit behind dark captures (`.frame.is-dark`), the clip play/pause toggle and the full-size viewer, so dark screenshots and video letterboxes look the same in both themes. `--stage-line` is the `.frame.is-dark` edge (invisible on cream, a hairline on dark stock). `--band` / `--on-band` / `--band-edge` are the contact footer: the ink band in light, a deeper band than the page with a hairline top edge in dark, never inverted to cream. `--ink` / `--on-ink` remain text and the primary button / skip link, which invert naturally (cream button, dark label). `--ring-on-ink` is the focus and hover colour on the stage and the band in both themes.
+- Mechanism: `site/styles.css` §2b holds the dark list twice, under `@media screen { :root[data-theme="dark"] }` and `@media screen and (prefers-color-scheme: dark) { :root:not([data-theme]) }`; `check-design.test.mjs` (j) requires the two to be identical. Both are screen-only, so print always uses the light tokens. `:root` carries `color-scheme: light`, the dark lists `color-scheme: dark`; the meta is `light dark`. Grain is `var(--grain, url("assets/texture/grain.svg"))`; dark sets `--grain` to `assets/texture/grain-dark.svg` (same turbulence and alpha matrix, specks in the dark `--ink` colour).
+- Dark tokens and computed ratios (WCAG 2.x):
+
+  | Token | Value | on `--bg` `#1a1612` | on `--paper` `#221d18` |
+  | --- | --- | --- | --- |
+  | `--ink` | `#ece3d2` | 14.12 | 13.11 |
+  | `--muted` | `#a99e8c` | 6.82 | 6.33 |
+  | `--accent` (links, focus ring) | `#8fabf7` | 8.00 | 7.43 |
+  | `--spire` | `#cfa64a` | 7.89 | 7.32 |
+  | `--ember` | `#e8854b` | 6.76 | 6.28 |
+  | `--mapper` | `#72b791` | 7.62 | 7.08 |
+  | `--npc` | `#b499ea` | 7.44 | 6.91 |
+  | `--rule` (decorative) | `#433a30` | 1.62 | 1.50 |
+
+  `--on-ink` `#1a1612` is 14.12 on `--ink` and 8.00 on `--accent` (primary button hover). `--band` `#0e0c0a` carries `--on-band` `#ece3d2` at 15.33 and `--ring-on-ink` at 9.90; on `--stage` the ring is 8.77. `theme-color` is `#f6f0e6` light and `#1a1612` dark.
+- Switch: a 44px square `button.theme-toggle` (moon in light, sun in dark: the icon names the theme a click switches to) at the top-right of `.page`, out of flow, `--rule` border like the carousel buttons. Its accessible name and tooltip state the action ("Switch to dark theme" / "Switch to light theme"); no `aria-pressed`, because a pressed state on an action label reads as a double negative. It ships `hidden` and is revealed by script, and is hidden in print.
+- Behaviour (inline script in `<head>`, before the stylesheet, identical on both pages): a saved `localStorage.theme` of `light` or `dark` wins; otherwise the system preference applies and is followed live. The script always sets `data-theme` before the stylesheet and body are parsed, so the first paint has the right theme, and it keeps both `theme-color` metas on the active colour. A click saves an explicit choice. Blocked storage falls back to the system preference and the switch still works for the page view. Without script the media-query list follows the system and the switch stays hidden. The switch is instant: no colour transitions were added.
+- Accepted debt: the two-state switch offers no "follow system" reset once a choice is saved (clearing site data restores it).
+
 ---
 
 Original comparison preamble follows.
