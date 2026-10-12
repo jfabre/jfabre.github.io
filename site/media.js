@@ -70,7 +70,8 @@ const show = (i) => {
   media.style.setProperty('--ratio', `${item.width} / ${item.height}`);
   media.style.setProperty('--w', item.width);
   if (item.video) {
-    Object.assign(media, { poster: item.poster, muted: true, loop: true, playsInline: true, controls: true, autoplay: !reduce.matches });
+    // A clean loop with no player chrome; under reduced motion it doesn't autoplay, so it keeps controls to start it.
+    Object.assign(media, { poster: item.poster, muted: true, loop: true, playsInline: true, controls: reduce.matches, autoplay: !reduce.matches });
     media.disablePictureInPicture = true;
     media.setAttribute('aria-label', item.label);
   } else {
@@ -119,7 +120,7 @@ let swipe = null;
 let swiped = false;
 stage.addEventListener('pointerdown', (event) => {
   const media = stage.firstElementChild;
-  const nearControls = media?.tagName === 'VIDEO' && event.clientY > media.getBoundingClientRect().bottom - 56;
+  const nearControls = media?.tagName === 'VIDEO' && media.controls && event.clientY > media.getBoundingClientRect().bottom - 56;
   swipe = event.pointerType === 'mouse' || nearControls ? null : { x: event.clientX, y: event.clientY };
 });
 stage.addEventListener('pointerup', (event) => {
