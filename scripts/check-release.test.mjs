@@ -15,7 +15,7 @@ const files = [
   'assets/projects/dungeon-mapper.webp', 'assets/projects/npc-voice.webp',
   'assets/projects/shadowdark-party.webp', 'assets/projects/shadowdark-equipment.webp', 'assets/projects/torchlight-spell.webp', 'assets/projects/torchlight-board.webp', 'assets/projects/npc-session.webp', 'assets/projects/npc-transcript.webp',
   'assets/projects/torchlight-timer.mp4', 'assets/projects/torchlight-spell.mp4', 'assets/projects/torchlight-board.mp4',
-  'assets/fonts/fraunces-latin-full-normal.woff2', 'assets/fonts/newsreader-latin-opsz-normal.woff2', 'assets/texture/grain.svg',
+  'assets/fonts/fraunces-latin-full-normal.woff2', 'assets/fonts/newsreader-latin-opsz-normal.woff2', 'assets/texture/grain.svg', 'assets/texture/grain-dark.svg',
 ];
 
 function fixture(t) {

@@ -83,12 +83,27 @@ function contrast(left, right) {
   return (hi + 0.05) / (lo + 0.05);
 }
 
+function hexTokens(block) {
+  const tokens = {};
+  for (const match of bodyOf(block).matchAll(/(--[\w-]+)\s*:\s*(#[0-9a-fA-F]{3,8})/g)) tokens[match[1]] = match[2];
+  return tokens;
+}
+
 function rootTokens() {
   const root = blockWith(':root');
   assert.ok(root, 'missing :root block');
-  const tokens = {};
-  for (const match of bodyOf(root).matchAll(/(--[\w-]+)\s*:\s*(#[0-9a-fA-F]{3,8})/g)) tokens[match[1]] = match[2];
-  return tokens;
+  return hexTokens(root);
+}
+
+const DARK_EXPLICIT = ':root[data-theme="dark"]';
+const DARK_SYSTEM = ':root:not([data-theme])';
+
+function darkBlocks() {
+  const explicit = blockWith(DARK_EXPLICIT);
+  const system = blockWith(DARK_SYSTEM);
+  assert.ok(explicit, `missing ${DARK_EXPLICIT} block`);
+  assert.ok(system, `missing ${DARK_SYSTEM} block`);
+  return { explicit, system };
 }
 
 test('(a) vendored Fraunces file is wOF2 with the pinned digest', () => {
@@ -205,4 +220,47 @@ test('(i) print and forced-colors blocks keep their contract', () => {
   const forced = blockWith('@media (forced-colors: active)');
   assert.ok(forced, 'missing forced-colors media');
   assert.match(bodyOf(forced), /background-image:\s*none/);
+});
+
+test('(j) dark tokens are screen-only, identical in both selectors, and meet contrast floors', () => {
+  const { explicit, system } = darkBlocks();
+  assert.ok(enclosedBy(explicit.bodyStart, (block) => norm(block.prelude) === '@media screen'), 'explicit dark outside @media screen');
+  assert.ok(enclosedBy(system.bodyStart, (block) => norm(block.prelude) === '@media screen and (prefers-color-scheme: dark)'), 'system dark outside its media query');
+  assert.equal(norm(bodyOf(explicit)), norm(bodyOf(system)), 'the two dark token lists differ');
+  assert.match(bodyOf(explicit), /color-scheme:\s*dark/);
+  assert.match(bodyOf(blockWith(':root')), /color-scheme:\s*light/);
+
+  const grain = bodyOf(explicit).match(/--grain:\s*url\(\s*"([^"]+)"\s*\)/);
+  assert.ok(grain, 'dark theme missing --grain');
+  assert.match(readFileSync(join(site, grain[1]), 'utf8'), /feTurbulence/);
+
+  const tokens = { ...rootTokens(), ...hexTokens(explicit) };
+  for (const name of ['--bg', '--paper', '--ink', '--muted', '--accent', '--spire', '--ember', '--mapper', '--npc', '--band']) {
+    assert.ok(name in hexTokens(explicit), `${name} not redefined for dark`);
+  }
+  const floor = (fg, bg, min) => {
+    const ratio = contrast(tokens[fg], tokens[bg]);
+    assert.ok(ratio >= min, `dark ${fg} on ${bg} contrast ${ratio.toFixed(2)} is below ${min}`);
+  };
+  for (const name of ['--ink', '--muted', '--accent', '--spire', '--ember', '--mapper', '--npc']) {
+    for (const surface of ['--bg', '--paper']) floor(name, surface, 4.5);
+  }
+  floor('--on-ink', '--ink', 4.5);
+  floor('--on-ink', '--accent', 4.5);
+  floor('--on-band', '--band', 4.5);
+  floor('--on-stage', '--stage', 4.5);
+  for (const surface of ['--bg', '--paper']) floor('--accent', surface, 3);
+  for (const surface of ['--stage', '--band']) floor('--ring-on-ink', surface, 3);
+});
+
+test('(k) theme script runs before the stylesheet and the switch ships hidden', () => {
+  for (const name of ['index.html', '404.html']) {
+    const html = readFileSync(join(site, name), 'utf8');
+    assert.ok(html.includes('<meta name="color-scheme" content="light dark">'), `${name} color-scheme meta`);
+    const script = html.indexOf('root.dataset.theme');
+    assert.ok(script > 0 && script < html.indexOf('<link rel="stylesheet"'), `${name} theme script order`);
+    const button = html.match(/<button class="theme-toggle"[^>]*>/);
+    assert.ok(button, `${name} missing theme switch`);
+    for (const attr of [' type="button"', ' hidden', ' aria-label="Switch to dark theme"']) assert.ok(button[0].includes(attr), `${name} switch ${attr}`);
+  }
 });
