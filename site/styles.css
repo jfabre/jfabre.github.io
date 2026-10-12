@@ -489,26 +489,6 @@ p { max-width: var(--measure); }
 .carousel-btn:hover:not(:disabled) { border-color: var(--row-accent, var(--ink)); color: var(--row-accent, var(--accent)); }
 .carousel-btn:disabled { opacity: 0.4; cursor: default; }
 
-/* Inline clip play/pause (WCAG 2.2.2), added by media.js over the frame's top-right corner */
-.motion-toggle {
-  position: absolute;
-  top: var(--space-2);
-  right: calc(var(--offset) + var(--space-2));
-  display: grid;
-  place-items: center;
-  width: var(--target-min);
-  height: var(--target-min);
-  padding: 0;
-  border: 1px solid color-mix(in srgb, var(--on-stage) 30%, transparent);
-  border-radius: 0;
-  background: color-mix(in srgb, var(--stage) 72%, transparent);
-  color: var(--on-stage);
-  cursor: pointer;
-  transition: border-color var(--dur) var(--ease);
-  --focus-ring-color: var(--ring-on-ink);
-}
-.motion-toggle:hover { border-color: var(--on-stage); }
-
 /* ---------- 9b. Full-size viewer: a native modal <dialog> built by media.js ---------- */
 html:has(.lightbox[open]) { overflow: hidden; }
 .lightbox {
@@ -670,7 +650,7 @@ html:has(.lightbox[open]) { overflow: hidden; }
   body { background: #fff; }
   .contact { background: none; color: var(--ink); }
   .contact .social-link { color: var(--ink); }
-  .frame-link::before, .carousel-controls::before, .carousel-btn, .motion-toggle, .theme-toggle { display: none; }
+  .frame-link::before, .carousel-controls::before, .carousel-btn, .theme-toggle { display: none; }
   .frame-link { padding: 0; }
   *, *::before, *::after { animation: none !important; }
 }

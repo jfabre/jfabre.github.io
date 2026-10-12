@@ -1,48 +1,25 @@
 // Screenshot media: inline loop playback and the full-size viewer.
 // Without this script every frame link still opens its image or clip directly, and clips show their poster.
 const reduce = matchMedia('(prefers-reduced-motion: reduce)');
-const PAUSE_ICON = '<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>';
-const PLAY_ICON = '<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"/></svg>';
 let viewerOpen = false;
 
-// ---------- Inline clips: play only while on screen, never under reduced motion unless asked ----------
-// A clip's choice is null (follow the motion preference), 'play' or 'pause' once its toggle is used.
-const clips = new Map();
+// ---------- Inline clips: loop only while on screen, never under reduced motion ----------
+const visible = new Set();
 const syncClip = (video) => {
-  const clip = clips.get(video);
-  const wanted = clip.choice ? clip.choice === 'play' : !reduce.matches;
-  if (clip.visible && wanted && !viewerOpen) video.play().catch(() => renderToggle(video));
+  // A refused autoplay (e.g. iOS Low Power Mode) just leaves the poster showing.
+  if (visible.has(video) && !reduce.matches && !viewerOpen) video.play().catch(() => {});
   else video.pause();
 };
-const renderToggle = (video) => {
-  const { toggle } = clips.get(video);
-  const playing = !video.paused;
-  toggle.innerHTML = playing ? PAUSE_ICON : PLAY_ICON;
-  toggle.setAttribute('aria-label', `${playing ? 'Pause' : 'Play'} animation`);
-};
+const clips = [...document.querySelectorAll('.carousel .frame video')];
 const visibility = new IntersectionObserver((entries) => {
   for (const entry of entries) {
-    clips.get(entry.target).visible = entry.isIntersecting;
+    if (entry.isIntersecting) visible.add(entry.target);
+    else visible.delete(entry.target);
     syncClip(entry.target);
   }
 }, { threshold: 0.5 });
-
-for (const video of document.querySelectorAll('.carousel .frame video')) {
-  const toggle = document.createElement('button');
-  toggle.type = 'button';
-  toggle.className = 'motion-toggle';
-  video.closest('.slide').append(toggle);
-  clips.set(video, { toggle, visible: false, choice: null });
-  toggle.addEventListener('click', () => {
-    clips.get(video).choice = video.paused ? 'play' : 'pause';
-    syncClip(video);
-  });
-  video.addEventListener('play', () => renderToggle(video));
-  video.addEventListener('pause', () => renderToggle(video));
-  renderToggle(video);
-  visibility.observe(video);
-}
-reduce.addEventListener('change', () => clips.forEach((_, video) => syncClip(video)));
+for (const video of clips) visibility.observe(video);
+reduce.addEventListener('change', () => clips.forEach(syncClip));
 
 // ---------- Viewer: native modal dialog, one gallery at a time ----------
 const viewer = document.createElement('dialog');
@@ -123,7 +100,7 @@ document.addEventListener('click', (event) => {
   viewer.setAttribute('aria-label', `${items[0].project}, full-size view`);
   show(links.indexOf(link));
   viewerOpen = true;
-  clips.forEach((_, video) => syncClip(video));
+  clips.forEach(syncClip);
   viewer.showModal();
 });
 
@@ -165,7 +142,7 @@ viewer.addEventListener('click', (event) => {
 viewer.addEventListener('close', () => {
   stage.replaceChildren();
   viewerOpen = false;
-  clips.forEach((_, video) => syncClip(video));
+  clips.forEach(syncClip);
   // Return focus to the item last viewed; the carousel follows focus, so it lands on that slide.
   items[index]?.link.focus({ preventScroll: true });
 });
