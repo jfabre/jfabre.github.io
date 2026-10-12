@@ -12,7 +12,6 @@ const copy = [
   'Jeremy Fabre',
   'Senior Software Developer',
   'A selection of personal projects built with AI-assisted development, from tabletop gaming tools to more ambitious applications that integrate AI directly.',
-  'Connect on LinkedIn',
   linkedIn,
 ];
 const card = (id) => `<article data-project="${id}"><img src="assets/projects/${id}.webp" alt="Project"></article>`;
