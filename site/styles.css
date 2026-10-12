@@ -506,6 +506,19 @@ p { max-width: var(--measure); }
   transition: transform 400ms var(--ease);
 }
 .slide:hover img, .slide:hover video { transform: scale(1.02); }
+/* Close-up crop: a capture whose shape or size would shrink its text fills the frame around a
+   focus point (--crop, also the zoom origin) and may zoom in (--zoom), so the row shows the part
+   the caption names at a readable size. The viewer always shows the whole capture. */
+.frame.is-crop img, .frame.is-crop video {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--crop, 50% 0%);
+  transform: scale(var(--zoom, 1));
+  transform-origin: var(--crop, 50% 0%);
+}
+.slide:hover .frame.is-crop img, .slide:hover .frame.is-crop video { transform: scale(calc(var(--zoom, 1) * 1.02)); }
 /* Captioned slides: link and caption travel together; the caption is plain text, not a link.
    Slides stretch to the tallest caption so the horizontal step stays one track width. */
 .frame-link { position: relative; display: block; padding: 0 var(--offset) var(--offset) 0; color: inherit; text-decoration: none; cursor: zoom-in; }
