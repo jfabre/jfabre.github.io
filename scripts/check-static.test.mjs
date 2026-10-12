@@ -11,7 +11,7 @@ const ids = ['shadowdark-sheet', 'torchlight-timer', 'dungeon-mapper', 'npc-voic
 const copy = [
   'Jeremy Fabre',
   'Senior Software Developer',
-  'A selection of personal projects built with AI-assisted development, from tabletop gaming tools to more ambitious applications that integrate AI directly.',
+  'A selection of personal projects built with LLMs, from tabletop gaming tools to more ambitious applications that integrate LLMs directly.',
   linkedIn,
 ];
 const card = (id) => `<article data-project="${id}"><img src="assets/projects/${id}.webp" alt="Project"></article>`;

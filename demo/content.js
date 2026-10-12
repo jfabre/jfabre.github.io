@@ -6,7 +6,7 @@ export const identity = {
 
 export const section = {
   heading: 'Selected projects',
-  intro: 'A selection of personal projects built with AI-assisted development, from tabletop gaming tools to more ambitious applications that integrate AI directly.',
+  intro: 'A selection of personal projects built with LLMs, from tabletop gaming tools to more ambitious applications that integrate LLMs directly.',
 };
 
 export const contact = {

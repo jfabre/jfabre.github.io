@@ -23,7 +23,7 @@ const namespaces = { '.svg': 'http://www.w3.org/2000/svg', '.xml': 'http://www.s
 const ids = ['shadowdark-sheet', 'torchlight-timer', 'dungeon-mapper', 'npc-voice'];
 const required = [
   'Jeremy Fabre', 'Senior Software Developer',
-  'A selection of personal projects built with AI-assisted development, from tabletop gaming tools to more ambitious applications that integrate AI directly.',
+  'A selection of personal projects built with LLMs, from tabletop gaming tools to more ambitious applications that integrate LLMs directly.',
   linkedIn,
 ];
 const textExtensions = new Set(['.html', '.js', '.mjs', '.css', '.svg', '.txt', '.xml', '.md']);
