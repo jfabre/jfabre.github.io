@@ -209,33 +209,10 @@ p { max-width: var(--measure); }
 .index-link:hover .index-name { text-decoration-color: var(--row-accent); }
 
 /* ---------- 7. Section rhythm ---------- */
-.projects { padding-block: var(--space-8) var(--space-6); }
+.projects { padding-block: 0 var(--space-6); }
 @media (min-width: 48em) {
   .opener { padding-block: var(--space-12) var(--space-10); }
-  .projects { padding-block: var(--space-10) var(--space-8); }
-}
-
-/* Section head: heading and intro sit as two columns on wide screens */
-.section-head {
-  display: grid;
-  gap: var(--space-4) var(--space-6);
-  margin-bottom: var(--space-4);
-}
-.section-heading {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
-  letter-spacing: -0.01em;
-  line-height: 1.1;
-  padding-bottom: var(--space-3);
-  border-bottom: 2px solid var(--ink);
-}
-.intro {
-  font-family: var(--font-reading);
-  font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.625rem);
-  line-height: 1.35;
-  color: var(--ink);
-  max-width: 34em;
+  .projects { padding-block: 0 var(--space-8); }
 }
 
 /* ---------- 8b. Project accents ---------- */
@@ -249,7 +226,6 @@ p { max-width: var(--measure); }
 .rows {
   display: grid;
   container-type: inline-size;
-  border-top: 1px solid var(--rule);
 }
 .row {
   display: grid;
