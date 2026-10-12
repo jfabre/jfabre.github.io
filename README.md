@@ -73,6 +73,9 @@ unique; computed JS templates are not evaluated. Symbolic links, private files,
 base overrides, external assets and nonapproved contact URLs fail closed.
 Only the exact approved LinkedIn and GitHub profile URLs, plus the TaleSpire, Shadowdark
 and two mod.io project links, are allowed externally.
+The publication origin is allowed only as an exact self-reference: the canonical link,
+`og:url`, `og:image` (an existing image under `assets/social/`), the sitemap `<loc>`
+and the robots `Sitemap:` line.
 `scripts/check-gallery.test.mjs` pins the site galleries: 3/3/1/3 slides, a caption on
 every feature slide, unique local media, the Darklight clip contract (muted loop, poster,
 no `autoplay` attribute), and the unchanged Dungeon Mapper image.

@@ -58,6 +58,24 @@ for (const [name, addition, reason] of [
 
 const publication = 'https://jfabre.github.io/';
 const canonical = `<link rel="canonical" href="${publication}">`;
+const ogUrl = `<meta property="og:url" content="${publication}">`;
+const ogImage = `<meta property="og:image" content="${publication}assets/social/preview.jpg">`;
+function withShareImage(t, head) {
+  const root = fixture(t, (html) => html.replace('<body>', `<head>${head}</head><body>`));
+  mkdirSync(join(root, 'assets/social'), { recursive: true });
+  writeFileSync(join(root, 'assets/social/preview.jpg'), 'fixture-only image');
+  return root;
+}
+test('exact og:url and an existing local og:image are accepted', (t) => run(t, [withShareImage(t, canonical + ogUrl + ogImage)], 0));
+test('og:image naming a missing share image is rejected', (t) => run(t,
+  [fixture(t, (html) => html.replace('<body>', `<head>${ogImage}</head><body>`))], 1, /missing asset assets\/social\/preview\.jpg/));
+for (const [name, head] of [
+  ['og:url on a subpath', ogUrl.replace(publication, `${publication}about/`)],
+  ['og:url on another origin', ogUrl.replace(publication, 'https://example.com/')],
+  ['og:image outside assets/social', ogImage.replace('assets/social/', 'assets/projects/')],
+  ['og:image on another origin', ogImage.replace(publication, 'https://example.com/')],
+  ['publication origin in another meta', `<meta property="og:see_also" content="${publication}">`],
+]) test(`${name} is rejected`, (t) => run(t, [withShareImage(t, head)], 1, /disallowed URL/));
 test('publication origin is accepted as an exact canonical link', (t) => run(t,
   [fixture(t, (html) => html.replace('<body>', `<head>${canonical}</head><body>`))], 0));
 test('publication sitemap and robots self-references are accepted', (t) => {

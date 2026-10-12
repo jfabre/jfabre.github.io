@@ -12,9 +12,10 @@ const projectLinks = [
   'https://mod.io/g/talespire/m/darklight-a-torghlight-timer-for-shadowdark',
 ];
 const contacts = [linkedIn, github, ...projectLinks];
-// Publication origin. Allowed only as an exact self-reference in three places:
-// <link rel="canonical"> in HTML, <loc> in a root sitemap.xml, and the Sitemap: line
-// of a root robots.txt. Changing the host is a content edit in those three files.
+// Publication origin. Allowed only as an exact self-reference: <link rel="canonical">,
+// <meta property="og:url"> and <meta property="og:image"> (an existing local image under
+// assets/social/) in HTML, <loc> in a root sitemap.xml, and the Sitemap: line of a root
+// robots.txt. Changing the host is a content edit in those files.
 const publication = 'https://jfabre.github.io/';
 const sitemapUrl = `${publication}sitemap.xml`;
 // XML namespace identifiers are not fetched; they are allowed only as exact xmlns values.
@@ -52,6 +53,9 @@ function stripSelfReferences(label, text) {
   let out = text;
   if (ext === '.html') {
     out = out.replace(new RegExp(`<link\\s+rel="canonical"\\s+href="${escape(publication)}"\\s*/?>`, 'g'), '<link data-self-reference>');
+    out = out.replace(new RegExp(`<meta\\s+property="og:url"\\s+content="${escape(publication)}"\\s*/?>`, 'g'), '<meta data-self-reference>');
+    // The share image must exist in the tree: it becomes a local asset reference.
+    out = out.replace(new RegExp(`<meta\\s+property="og:image"\\s+content="${escape(publication)}(assets/social/[\\w-]+\\.(?:jpg|png))"\\s*/?>`, 'g'), '<meta data-asset="$1">');
   }
   if (label === 'sitemap.xml') {
     out = out.replace(new RegExp(`<loc>${escape(publication)}</loc>`, 'g'), '<loc>self-reference</loc>');
