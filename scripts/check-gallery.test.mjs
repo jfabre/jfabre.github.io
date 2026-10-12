@@ -25,13 +25,13 @@ test('projects keep order and slide counts 3/3/1/3', () => {
   }
 });
 
-test('nine feature slides each carry heading, description, provenance and described media', () => {
-  const featured = Object.entries(rows()).filter(([id]) => id !== 'dungeon-mapper').flatMap(([, b]) => slidesOf(b));
+test('nine feature slides each carry heading, description and described media, no provenance line', () => {
+  const featured = Object.entries(rows()).filter(([id]) => id !== 'dungeon-mapper').flatMap(([id, b]) => slidesOf(b).map((slide) => [id, slide]));
   assert.equal(featured.length, 9);
-  for (const slide of featured) {
+  for (const [id, slide] of featured) {
     assert.match(slide, /<h4 class="slide-title">[^<]+<\/h4>/);
     assert.match(slide, /<p class="slide-text">[^<]+<\/p>/);
-    assert.match(slide, /<p class="slide-source">[^<]+<\/p>/);
+    assert.doesNotMatch(slide, /slide-source/, id);
     const media = slide.match(/<(img|video) [^>]*>/);
     assert.ok(media, 'slide media');
     assert.match(media[0], /width="\d+" height="\d+"/);

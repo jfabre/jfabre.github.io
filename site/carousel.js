@@ -1,11 +1,14 @@
 // Per-project screenshot carousel. Controls always render; arrows disable at the ends. The track is a native scroll-snap strip, so swipe,
 // trackpad and keyboard scrolling work without script; this adds prev/next and a counter.
 // Buttons ship disabled in the markup and are enabled here only once the state is known.
+// Only the visible slide's link is tabbable, so Tab moves track → slide → arrows and off-screen
+// slides are reached with the arrows or by scrolling the track.
 for (const carousel of document.querySelectorAll('[data-carousel]')) {
   const track = carousel.querySelector('.carousel-track');
   const slides = [...track.querySelectorAll(':scope > .slide')];
   const count = carousel.querySelector('.carousel-count');
   const [prev, next] = carousel.querySelectorAll('.carousel-btn');
+  const links = slides.map((slide) => (slide.matches('a') ? slide : slide.querySelector('.frame-link')));
   const last = slides.length - 1;
   const clamp = (i) => Math.min(Math.max(i, 0), last);
   const offset = (i) => slides[i].offsetLeft - slides[0].offsetLeft;
@@ -26,6 +29,7 @@ for (const carousel of document.querySelectorAll('[data-carousel]')) {
     prev.disabled = index === 0;
     next.disabled = index === last;
     carousel.style.setProperty('--progress', ((index + 1) / slides.length).toFixed(4));
+    links.forEach((link, i) => { if (i === index) link.removeAttribute('tabindex'); else link.tabIndex = -1; });
   };
   const sync = () => {
     const settled = nearest();

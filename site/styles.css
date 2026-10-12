@@ -413,7 +413,7 @@ p { max-width: var(--measure); }
   scroll-margin-top: 8rem;
 }
 .row .title::before { content: ""; display: block; width: 2.5rem; height: 3px; margin-bottom: var(--space-3); background: var(--row-accent); }
-.row .summary { margin-top: var(--space-3); color: var(--muted); }
+.row .summary { margin-top: var(--space-3); }
 .row .meta {
   margin-top: var(--space-3);
   display: grid;
@@ -541,8 +541,7 @@ p { max-width: var(--measure); }
   font-size: 1.1875rem;
   line-height: 1.25;
 }
-.slide-text { margin-top: var(--space-2); font-size: 0.9375rem; }
-.slide-source { margin-top: var(--space-2); font-size: 0.8125rem; color: var(--muted); }
+.slide-text { margin-top: var(--space-2); font-size: 0.9375rem; color: var(--muted); }
 .carousel-controls {
   display: flex;
   align-items: center;

@@ -27,14 +27,14 @@ viewer.className = 'lightbox';
 viewer.innerHTML = `
   <div class="lightbox-bar">
     <p class="lightbox-count" aria-live="polite"></p>
-    <button class="lightbox-btn lightbox-close" type="button" aria-label="Close viewer" autofocus>&#215;</button>
+    <button class="lightbox-btn lightbox-close" type="button" aria-label="Close viewer" autofocus><span aria-hidden="true">&#215;</span></button>
   </div>
   <figure class="lightbox-figure">
     <div class="lightbox-stage"></div>
     <figcaption class="lightbox-caption"></figcaption>
   </figure>
-  <button class="lightbox-btn lightbox-nav" type="button" data-dir="-1" aria-label="Previous">&#8592;</button>
-  <button class="lightbox-btn lightbox-nav" type="button" data-dir="1" aria-label="Next">&#8594;</button>`;
+  <button class="lightbox-btn lightbox-nav" type="button" data-dir="-1" aria-label="Previous"><span aria-hidden="true">&#8592;</span></button>
+  <button class="lightbox-btn lightbox-nav" type="button" data-dir="1" aria-label="Next"><span aria-hidden="true">&#8594;</span></button>`;
 document.body.append(viewer);
 const stage = viewer.querySelector('.lightbox-stage');
 const caption = viewer.querySelector('.lightbox-caption');
